@@ -1,0 +1,237 @@
+
+-- -----------------------------------------------------
+-- Table `State`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `State` (
+  `id_State` INT NOT NULL AUTO_INCREMENT,
+  `uf` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_State`))
+;
+
+
+-- -----------------------------------------------------
+-- Table `Dealership`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Dealership` (
+  `id_Dealership` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `cnpj` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `tel1` VARCHAR(45) NULL,
+  `tel2` VARCHAR(45) NULL,
+  `cep` VARCHAR(45) NULL,
+  `num_cep` VARCHAR(45) NULL,
+  `id_State` INT NOT NULL,
+  PRIMARY KEY (`id_Dealership`, `id_State`),
+  INDEX `fk_Dealership_State1_idx` (`id_State` ASC),
+  CONSTRAINT `fk_Dealership_State1`
+    FOREIGN KEY (`id_State`)
+    REFERENCES `State` (`id_State`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `Tariff`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Tariff` (
+  `id_Tariff` INT NOT NULL AUTO_INCREMENT,
+  `date` DATE NOT NULL,
+  `id_Dealership` INT NOT NULL,
+  PRIMARY KEY (`id_Tariff`, `id_Dealership`),
+  INDEX `fk_Tariff_Dealership1_idx` (`id_Dealership` ASC),
+  CONSTRAINT `fk_Tariff_Dealership1`
+    FOREIGN KEY (`id_Dealership`)
+    REFERENCES `Dealership` (`id_Dealership`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `Blue`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Blue` (
+  `id_Blue` INT NOT NULL AUTO_INCREMENT,
+  `demanda_ponta` FLOAT NOT NULL,
+  `demanda_fora_ponta` FLOAT NOT NULL,
+  `te_ponta` FLOAT NOT NULL,
+  `te_fora_ponta` FLOAT NOT NULL,
+  `tusd_ponta` FLOAT NOT NULL,
+  `tusd_fora_ponta` FLOAT NOT NULL,
+  `id_Tariff` INT NOT NULL,
+  `id_Dealership` INT NOT NULL,
+  PRIMARY KEY (`id_Blue`, `id_Tariff`, `id_Dealership`),
+  INDEX `fk_Blue_Tariff1_idx` (`id_Tariff` ASC, `id_Dealership` ASC),
+  CONSTRAINT `fk_Blue_Tariff1`
+    FOREIGN KEY (`id_Tariff` , `id_Dealership`)
+    REFERENCES `Tariff` (`id_Tariff` , `id_Dealership`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `Category`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Category` (
+  `id_Category` INT NOT NULL AUTO_INCREMENT,
+  `group` VARCHAR(45) NOT NULL,
+  `modality` VARCHAR(45) NULL,
+  `subgroup` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_Category`))
+;
+
+
+-- -----------------------------------------------------
+-- Table `Green`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Green` (
+  `id_Green` INT NOT NULL AUTO_INCREMENT,
+  `te_ponta` FLOAT NOT NULL,
+  `te_fora_ponta` FLOAT NOT NULL,
+  `tusd_ponta` FLOAT NOT NULL,
+  `tusd_fora_ponta` FLOAT NOT NULL,
+  `demanda_unica` FLOAT NOT NULL,
+  `id_Category` INT NOT NULL,
+  `id_Tariff` INT NOT NULL,
+  `id_Dealership` INT NOT NULL,
+  PRIMARY KEY (`id_Green`, `id_Category`, `id_Tariff`, `id_Dealership`),
+  INDEX `fk_Green_Category1_idx` (`id_Category` ASC),
+  INDEX `fk_Green_Tariff1_idx` (`id_Tariff` ASC, `id_Dealership` ASC),
+  CONSTRAINT `fk_Green_Category1`
+    FOREIGN KEY (`id_Category`)
+    REFERENCES `Category` (`id_Category`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Green_Tariff1`
+    FOREIGN KEY (`id_Tariff` , `id_Dealership`)
+    REFERENCES `Tariff` (`id_Tariff` , `id_Dealership`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `Conventional`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Conventional` (
+  `id_Conventional` INT NOT NULL AUTO_INCREMENT,
+  `te` VARCHAR(45) NULL,
+  `tusd` VARCHAR(45) NULL,
+  `id_Category` INT NOT NULL,
+  `id_Tariff` INT NOT NULL,
+  `id_Dealership` INT NOT NULL,
+  PRIMARY KEY (`id_Conventional`, `id_Category`, `id_Tariff`, `id_Dealership`),
+  INDEX `fk_Conventional_Category1_idx` (`id_Category` ASC),
+  INDEX `fk_Conventional_Tariff1_idx` (`id_Tariff` ASC, `id_Dealership` ASC),
+  CONSTRAINT `fk_Conventional_Category1`
+    FOREIGN KEY (`id_Category`)
+    REFERENCES `Category` (`id_Category`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Conventional_Tariff1`
+    FOREIGN KEY (`id_Tariff` , `id_Dealership`)
+    REFERENCES `Tariff` (`id_Tariff` , `id_Dealership`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `White`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `White` (
+  `id_White` INT NOT NULL AUTO_INCREMENT,
+  `te_ponta` FLOAT NOT NULL,
+  `tusd_ponta` FLOAT NOT NULL,
+  `te_intermed` FLOAT NOT NULL,
+  `te_fora_ponta` FLOAT NOT NULL,
+  `tusd_fora_ponta` FLOAT NOT NULL,
+  `id_Category` INT NOT NULL,
+  `id_Tariff` INT NOT NULL,
+  `id_Dealership` INT NOT NULL,
+  PRIMARY KEY (`id_White`, `id_Category`, `id_Tariff`, `id_Dealership`),
+  INDEX `fk_White_Category1_idx` (`id_Category` ASC),
+  INDEX `fk_White_Tariff1_idx` (`id_Tariff` ASC, `id_Dealership` ASC),
+  CONSTRAINT `fk_White_Category1`
+    FOREIGN KEY (`id_Category`)
+    REFERENCES `Category` (`id_Category`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_White_Tariff1`
+    FOREIGN KEY (`id_Tariff` , `id_Dealership`)
+    REFERENCES `Tariff` (`id_Tariff` , `id_Dealership`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `Tributes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Tributes` (
+  `id_Tributes` INT NOT NULL AUTO_INCREMENT,
+  `id_State` INT NOT NULL,
+  `date` DATE NOT NULL,
+  `cofins` FLOAT NOT NULL,
+  `icms1` FLOAT NOT NULL,
+  `icms2` FLOAT NOT NULL,
+  `pis` FLOAT NOT NULL,
+  PRIMARY KEY (`id_Tributes`, `id_State`),
+  INDEX `fk_Tributes_State1_idx` (`id_State` ASC),
+  CONSTRAINT `fk_Tributes_State1`
+    FOREIGN KEY (`id_State`)
+    REFERENCES `State` (`id_State`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `User` (
+  `id_User` INT NOT NULL AUTO_INCREMENT,
+  `id_Dealership` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `cnpj_cpf` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NULL,
+  `tel1` VARCHAR(45) NULL,
+  `tel2` VARCHAR(45) NULL,
+  `cep` VARCHAR(45) NULL,
+  `num_cep` VARCHAR(45) NULL,
+  PRIMARY KEY (`id_User`, `id_Dealership`),
+  INDEX `fk_User_Dealership1_idx` (`id_Dealership` ASC),
+  CONSTRAINT `fk_User_Dealership1`
+    FOREIGN KEY (`id_Dealership`)
+    REFERENCES `Dealership` (`id_Dealership`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
+
+
+-- -----------------------------------------------------
+-- Table `Bill`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Bill` (
+  `id_Bill` INT NOT NULL AUTO_INCREMENT,
+  `id_Category` INT NOT NULL,
+  `id_User` INT NOT NULL,
+  `measures` JSON NOT NULL,
+  `date` DATE NOT NULL,
+  PRIMARY KEY (`id_Bill`, `id_Category`, `id_User`),
+  INDEX `fk_Bill_Category1_idx` (`id_Category` ASC),
+  INDEX `fk_Bill_User1_idx` (`id_User` ASC),
+  CONSTRAINT `fk_Bill_Category1`
+    FOREIGN KEY (`id_Category`)
+    REFERENCES `Category` (`id_Category`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Bill_User1`
+    FOREIGN KEY (`id_User`)
+    REFERENCES `User` (`id_User`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+;
