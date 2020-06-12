@@ -3,7 +3,8 @@ window.addEventListener('load', (event) => {
     .then(value => {
         let select_state_add = document.getElementById('sel_new_dealer');
         let select_state_tribute = document.getElementById('sel_state_tribute');
-        
+        console.log('value state');
+        console.log(value);
         value.map(state => {
             let opt1 = document.createElement('option');
             let opt2 = document.createElement('option');

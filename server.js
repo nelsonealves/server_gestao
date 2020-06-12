@@ -1,3 +1,4 @@
+require('dotenv').config();
 exp = require('express'),
 express = exp(),
 bodyParser = require('body-parser'),
@@ -5,7 +6,7 @@ consign = require('consign'),
 cors = require('cors'),
 expressValidator = require('express-validator'),
 express_session = require('express-session'),
-config = require('./config');
+
 
 
 express.use(bodyParser.json());
@@ -24,7 +25,7 @@ consign().include('routes')
 .then('database.js')
 .into(express);;
 
-express.listen(config.express.port, function(){
+express.listen(process.env.EXPRESS_PORT, function(){
   console.log("Express ok!\n");
 })
 

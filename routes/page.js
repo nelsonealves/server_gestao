@@ -4,11 +4,11 @@ const config = require('../config');
 module.exports = (express) => {
   
     express.get('/', (req, res) => {
-        res.sendFile(path.join(`${config.page.pwd}/server_gestao/view/home.html`));
+        res.sendFile(path.resolve(__dirname + '/../view/home.html'));
     });
 
     express.get('/home', (req, res) => {
-        res.sendFile(path.join(`${config.page.pwd}/server_gestao/view/home.js`));
+        res.sendFile(path.resolve(__dirname+'/../view/home.js') );
     });
 
 }
