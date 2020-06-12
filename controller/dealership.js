@@ -1,56 +1,54 @@
+let mongoose = require('../database.js');
+let dealershipSchema = require('../model/dealership');
+let modelDealership = mongoose.model('Dealership', dealershipSchema);
+let stateSchema = require('../model/state');
+let modelState = mongoose.model('State', stateSchema);
+let objectid = require('mongodb').ObjectID;
 
-
-module.exports.add = (express, req, res) => {
-    express
-    .controller
-    .query
-    .execQuery(`INSERT INTO Dealership (
-        name, 
-        birthday,
-        cnpj,
-        email,
-        tel1,
-        tel2,
-        cep,
-        num_cep,
-        id_State) 
-        VALUES (
-            ${req.body.name},
-            ${req.body.cnpj},
-            ${req.body.email},
-            ${req.body.tel1},
-            ${req.body.tel2},
-            ${req.body.cep},
-            ${req.body.num_cep},
-            ${req.body.id_State}, 
-            STR_TO_DATE('${req.body.birthday}', '%d-%m-%Y'))`, res);
+module.exports.add = (req, res) => {
+    modelState.aggregate(
+        [{
+            $match: {
+                uf: req.body.uf
+            }
+        }],
+        (err, resp1) => {
+            if (err) res.status(404);
+            req.body.idState = resp1[0]._id;
+            let Dealership = new modelDealership(req.body);
+            Dealership.save((err, resp2) => {
+                if (err) res.status(404);
+                res.status(200).send(resp2);
+            });
+        }
+    );
+    
+    
 }
 
-module.exports.get_by_id = (express, req, res) => {
-    express
-    .controller
-    .query
-    .execQuery(`SELECT * FROM Dealership \
-        WHERE id_Dealership=${req.params.dealership_id}`, res);
+module.exports.get_by_id = (req, res) => {
+   
 }
 
-module.exports.get_all = (express, req, res) => {
-    express
-    .controller
-    .query
-    .execQuery("SELECT * FROM Dealership", res);
+module.exports.get_all = (req, res) => {
+    
 }
 
-module.exports.update = (express, req, res) => {
-    express
-    .controller
-    .query
-    .execQuery("SELECT * FROM Dealership", res);
+module.exports.get_all_state = (req, res) => {
+    modelDealership.find({})
+    .exec((err, resp) => {
+        if(err) res.send(err);
+        modelDealership.populate(resp, {path: 'idState', model: 'State'}, (err, resp1) => {
+            if(err) res.status(404).send(err);
+            res.status(200).send(resp1);
+        })
+    })
 }
 
-module.exports.delete = (express, req, res) => {
-    express
-    .controller
-    .query
-    .execQuery("SELECT * FROM Dealership", res);
+module.exports.update = (req, res) => {
+    
+}
+
+module.exports.delete = (req, res) => {
+    
 }

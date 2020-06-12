@@ -1,11 +1,12 @@
-const mysql = require('mysql'),
 exp = require('express'),
 express = exp(),
 bodyParser = require('body-parser'),
 consign = require('consign'),
 cors = require('cors'),
 expressValidator = require('express-validator'),
-express_session = require('express-session');
+express_session = require('express-session'),
+config = require('./config');
+
 
 express.use(bodyParser.json());
 express.use(express_session({
@@ -19,28 +20,12 @@ express.use(cors());
 
 consign().include('routes')
 .then('controller')
+.then('model')
+.then('database.js')
 .into(express);;
 
-const connection = mysql.createConnection({
-  host     : 'localhost',
-  port     : 3306,
-  user     : 'root',
-  password : 'password',
-  database : 'elnixenergy'
-});
+express.listen(config.express.port, function(){
+  console.log("Express ok!\n");
+})
 
-connection.connect(function(err){
-    if(err) return console.log(err);
-    console.log('MySQL ok!\n');
-    express.listen(8081, function(){
-        console.log("Express ok!\n");
-    });
-  })
-
-
-module.exports = express;
-
-//express.use(bodyParser.urlencoded({extended: true}));
-
-
-
+module.exports = express

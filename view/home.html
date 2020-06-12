@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="theme-color" content="#000000" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <title>Gestão de Fatura</title>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#add">Adicionar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home">Concessionária</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu1">Estado</a>
+      </li>
+
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="add" class="container tab-pane fade">
+        <div class="col-12">
+
+          <div class="row">
+            Concessionária:
+            <input type="text" id="dealership_name">
+          </div>
+          <div class="row">
+            Estado
+            <select id="sel_new_dealer" name="sellist1">
+              <option></option>
+            </select>
+          </div>
+
+          <div class="row">
+            <button type="button" id="add_dealership" class="btn btn-success">Adicionar</button>
+          </div>
+        </div>
+      </div>
+      <div id="home" class="container tab-pane active"><br>
+
+        <div class="col-12">
+          <div class="row">
+            Concessionária
+            <select id="dealership" name="sellist1">
+              <option></option>
+
+            </select>
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <div class="row">
+            <input type="text" placeholder="Data" id="date_tariff">
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <b>TARIFA HORO-SAZONAL AZUL</b>
+          </div>
+          <div class="row">
+            <table>
+              <tr>
+                <td></td>
+                <td>Demanda P</td>
+                <td>Demanda FP </td>
+                <td>TE P</td>
+                <td>TE FP</td>
+                <td>TUSD P</td>
+                <td>TUSD FP</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="a_a1" class="form-check-input" value="">A1</td>
+                <td><input type="text" value="0.1" id="a1_dp"> </td>
+                <td><input type="text" value="0.1" id="a1_d_fp"></td>
+                <td><input type="text" value="0.1" id="a1_te_p"></td>
+                <td><input type="text" value="0.1" id="a1_te_fp"></td>
+                <td><input type="text" value="0.1" id="a1_tusd_p"></td>
+                <td><input type="text" value="0.1" id="a1_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="a_a2" class="form-check-input" value="">A2</td>
+                <td><input type="text" value="0.1" id="a2_dp"> </td>
+                <td><input type="text" value="0.1" id="a2_d_fp"></td>
+                <td><input type="text" value="0.1" id="a2_te_p"></td>
+                <td><input type="text" value="0.1" id="a2_te_fp"></td>
+                <td><input type="text" value="0.1" id="a2_tusd_p"></td>
+                <td><input type="text" value="0.1" id="a2_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="a_a3" class="form-check-input" value="">A3</td>
+                <td><input type="text" value="0.1" id="a3_dp"> </td>
+                <td><input type="text" value="0.1" id="a3_d_fp"></td>
+                <td><input type="text" value="0.1" id="a3_te_p"></td>
+                <td><input type="text" value="0.1" id="a3_te_fp"></td>
+                <td><input type="text" value="0.1" id="a3_tusd_p"></td>
+                <td><input type="text" value="0.1" id="a3_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="a_a3a" class="form-check-input" value="">A3A</td>
+                <td><input type="text" value="0.1" id="a3a_dp"> </td>
+                <td><input type="text" value="0.1" id="a3a_d_fp"></td>
+                <td><input type="text" value="0.1" id="a3a_te_p"></td>
+                <td><input type="text" value="0.1" id="a3a_te_fp"></td>
+                <td><input type="text" value="0.1" id="a3a_tusd_p"></td>
+                <td><input type="text" value="0.1" id="a3a_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="a_a4" class="form-check-input" value="">A4</td>
+                <td><input type="text" value="0.1" id="a4_dp"> </td>
+                <td><input type="text" value="0.1" id="a4_d_fp"></td>
+                <td><input type="text" value="0.1" id="a4_te_p"></td>
+                <td><input type="text" value="0.1" id="a4_te_fp"></td>
+                <td><input type="text" value="0.1" id="a4_tusd_p"></td>
+                <td><input type="text" value="0.1" id="a4_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="a_as" class="form-check-input" value="">AS</td>
+                <td><input type="text" value="0.1" id="as_dp"> </td>
+                <td><input type="text" value="0.1" id="as_d_fp"></td>
+                <td><input type="text" value="0.1" id="as_te_p"></td>
+                <td><input type="text" value="0.1" id="as_te_fp"></td>
+                <td><input type="text" value="0.1" id="as_tusd_p"></td>
+                <td><input type="text" value="0.1" id="as_tusd_fp"></td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+
+
+
+        <div class="col-12">
+          <div class="row">
+            <b>TARIFA HORO-SAZONAL VERDE</b>
+          </div>
+          <div class="row">
+            <table>
+              <tr>
+                <td></td>
+                <td>Demanda U</td>
+                <td>TE P </td>
+                <td>TE FP</td>
+                <td>TUSD P</td>
+                <td>TUSD FP</td>
+
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="v_a_a1" class="form-check-input" value="">A1</td>
+                <td><input type="text" value="0.1" id="v_a1_d_u"> </td>
+                <td><input type="text" value="0.1" id="v_a1_te_p"></td>
+                <td><input type="text" value="0.1" id="v_a1_te_fp"></td>
+                <td><input type="text" value="0.1" id="v_a1_tusd_p"></td>
+                <td><input type="text" value="0.1" id="v_a1_tusd_fp"></td>
+
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="v_a_a2" class="form-check-input" value="">A2</td>
+                <td><input type="text" value="0.1" id="v_a2_d_u"> </td>
+                <td><input type="text" value="0.1" id="v_a2_te_p"></td>
+                <td><input type="text" value="0.1" id="v_a2_te_fp"></td>
+                <td><input type="text" value="0.1" id="v_a2_tusd_p"></td>
+                <td><input type="text" value="0.1" id="v_a2_tusd_fp"></td>
+
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="v_a_a3" class="form-check-input" value="">A3</td>
+                <td><input type="text" value="0.1" id="v_a3_d_u"> </td>
+                <td><input type="text" value="0.1" id="v_a3_te_p"></td>
+                <td><input type="text" value="0.1" id="v_a3_te_fp"></td>
+                <td><input type="text" value="0.1" id="v_a3_tusd_p"></td>
+                <td><input type="text" value="0.1" id="v_a3_tusd_fp"></td>
+
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="v_a_a3a" class="form-check-input" value="">A3A</td>
+                <td><input type="text" value="0.1" id="v_a3a_d_u"> </td>
+                <td><input type="text" value="0.1" id="v_a3a_te_p"></td>
+                <td><input type="text" value="0.1" id="v_a3a_te_fp"></td>
+                <td><input type="text" value="0.1" id="v_a3a_tusd_p"></td>
+                <td><input type="text" value="0.1" id="v_a3a_tusd_fp"></td>
+
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="v_a_a4" class="form-check-input" value="">A4</td>
+                <td><input type="text" value="0.1" id="v_a4_d_u"> </td>
+                <td><input type="text" value="0.1" id="v_a4_te_p"></td>
+                <td><input type="text" value="0.1" id="v_a4_te_fp"></td>
+                <td><input type="text" value="0.1" id="v_a4_tusd_p"></td>
+                <td><input type="text" value="0.1" id="v_a4_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="v_a_as" class="form-check-input" value="">AS</td>
+                <td><input type="text" value="0.1" id="v_as_d_u"> </td>
+                <td><input type="text" value="0.1" id="v_as_te_p"></td>
+                <td><input type="text" value="0.1" id="v_as_te_fp"></td>
+                <td><input type="text" value="0.1" id="v_as_tusd_p"></td>
+                <td><input type="text" value="0.1" id="v_as_tusd_fp"></td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <div class="row">
+            <b>TARIFA BRANCA</b>
+          </div>
+          <div class="row">
+            <table>
+              <tr>
+                <td></td>
+                <td>TE P</td>
+                <td>TE I</td>
+                <td>TE FP </td>
+                <td>TUSD P</td>
+                <td>TUSD FP</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="w_b_b1" class="form-check-input" value="">B1</td>
+                <td><input type="text" value="0.1" id="b1_te_p"> </td>
+                <td><input type="text" value="0.1" id="b1_te_i"></td>
+                <td><input type="text" value="0.1" id="b1_te_fp"></td>
+                <td><input type="text" value="0.1" id="b1_tusd_p"></td>
+                <td><input type="text" value="0.1" id="b1_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="w_b_b2" class="form-check-input" value="">B2</td>
+                <td><input type="text" value="0.1" id="b2_te_p"> </td>
+                <td><input type="text" value="0.1" id="b2_te_i"></td>
+                <td><input type="text" value="0.1" id="b2_te_fp"></td>
+                <td><input type="text" value="0.1" id="b2_tusd_p"></td>
+                <td><input type="text" value="0.1" id="b2_tusd_fp"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="w_b_b3" class="form-check-input" value="">B3</td>
+                <td><input type="text" value="0.1" id="b3_te_p"> </td>
+                <td><input type="text" value="0.1" id="b3_te_i"></td>
+                <td><input type="text" value="0.1" id="b3_te_fp"></td>
+                <td><input type="text" value="0.1" id="b3_tusd_p"></td>
+                <td><input type="text" value="0.1" id="b3_tusd_fp"></td>
+              </tr>
+
+            </table>
+
+          </div>
+        </div>
+
+
+        <div class="col-12">
+          <div class="row">
+            <b> TARIFA CONVENCIONAL</b>
+          </div>
+          <div class="row">
+            <table>
+              <tr>
+                <td></td>
+                <td>TE</td>
+                <td>TUSD</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="c_b1" class="form-check-input" value="">B1</td>
+                <td><input type="text" value="0.1" id="b1_te"> </td>
+                <td><input type="text" value="0.1" id="b1_tusd"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="c_b2" class="form-check-input" value="">B2</td>
+                <td><input type="text" value="0.1" id="b2_te"> </td>
+                <td><input type="text" value="0.1" id="b2_tusd"></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" id="c_b3" class="form-check-input" value="">B3</td>
+                <td><input type="text" value="0.1" id="b3_te"> </td>
+                <td><input type="text" value="0.1" id="b3_tusd"></td>
+              </tr>
+
+            </table>
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <button class="btn btn-success" id="add_tariff">Adicionar</button>
+        </div>
+
+      </div>
+      <div id="menu1" class="container tab-pane fade"><br>
+        <div class="col-12">
+          <div class="row">
+            Estado
+            <select id="sel_state_tribute" name="sellist1">
+              <option></option>
+            </select>
+          </div>
+          <div class="row">
+            Data:
+            <input type="text" id="date_state">
+          </div>
+          <div class="row">
+            ICMS1
+            <input type="text" id="icms1">
+          </div>
+          <div class="row">
+            ICMS2
+            <input type="text" id="icms2">
+          </div>
+          <div class="row">
+            <button class="btn btn-success" id="add_tribute">Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="./home"></script>
+</body>
+
+</html>
