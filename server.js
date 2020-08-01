@@ -25,8 +25,9 @@ consign().include('routes')
 .then('database.js')
 .into(express);;
 
-express.listen(process.env.PORT || 3000, function(){
+express.listen(process.env.PORT || 8081, function(){
   console.log("Express ok!\n");
 })
 
 module.exports = express
+

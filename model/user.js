@@ -7,6 +7,10 @@ let User = new mongoose.Schema ({
         type: String,
         required: true
         },
+    status: { 
+        type: Number,
+        required: true
+        },
     cnpj: {
         type: String,
     },
@@ -28,7 +32,6 @@ let User = new mongoose.Schema ({
     idDealership: {
         type: mongoose.Schema.ObjectId,
         ref: 'Dealership',
-        required: true
     }
     },{collection: 'User'}
 );

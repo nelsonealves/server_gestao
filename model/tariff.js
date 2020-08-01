@@ -4,9 +4,9 @@ let mongoose = require('../database');
 
 let Tariff = new mongoose.Schema ({
     date: Date,
-    idDealership: {
+    id_Caregory_Dealership: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Dealership',
+        ref: 'Category_Dealership',
         required: true
     },
     },{collection: 'Tariff'}

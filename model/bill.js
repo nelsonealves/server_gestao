@@ -20,7 +20,8 @@ let Bill = new mongoose.Schema ({
         type: Number,
         required: true
     },
-    measures: String
+    measures: [],
+    
     },{collection: 'Bill'}
 );
 

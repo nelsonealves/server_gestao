@@ -24,8 +24,7 @@
 
   <div class="container-fluid">
 
-
-    <!-- Nav tabs -->
+    <div class="col-12">    <!-- Nav tabs -->
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#add">Adicionar</a>
@@ -40,8 +39,11 @@
     </ul>
 
     <!-- Tab panes -->
+    <div class="row">
+      <div class="col-12">
+
     <div class="tab-content">
-      <div id="add" class="container tab-pane fade">
+      <div id="add" class="col-12 tab-pane fade">
         <div class="col-12">
 
           <div class="row">
@@ -60,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div id="home" class="container tab-pane active"><br>
+      <div id="home" class="col-12 tab-pane active"><br>
 
         <div class="col-12">
           <div class="row">
@@ -82,20 +84,27 @@
           <div class="row">
             <b>TARIFA HORO-SAZONAL AZUL</b>
           </div>
-          <div class="row">
-            <table>
+          <div class="table table-responsive table-hover">
+            <table class="table">
+              <thead>
               <tr>
                 <td></td>
-                <td>Demanda P</td>
-                <td>Demanda FP </td>
-                <td>TE P</td>
-                <td>TE FP</td>
-                <td>TUSD P</td>
-                <td>TUSD FP</td>
+                <th><div class="col-2">Demanda P</class></th>
+                <th><div class="col-2">Demanda FP</div> </th>
+                <th><div class="col-2">TE P</div></th>
+                <th><div class="col-2">TE FP</div></th>
+                <th><div class="col-2">TUSD P</div></th>
+                <th><div class="col-2">TUSD FP</div></th>
               </tr>
+            </thead>
+            <tbody>
               <tr>
                 <td><input type="checkbox" id="a_a1" class="form-check-input" value="">A1</td>
-                <td><input type="text" value="0.1" id="a1_dp"> </td>
+                <td>
+                  <div class="col">
+                    <input type="text" value="0.1" id="a1_dp"> 
+                  </div>
+                </td>
                 <td><input type="text" value="0.1" id="a1_d_fp"></td>
                 <td><input type="text" value="0.1" id="a1_te_p"></td>
                 <td><input type="text" value="0.1" id="a1_te_fp"></td>
@@ -147,6 +156,7 @@
                 <td><input type="text" value="0.1" id="as_tusd_p"></td>
                 <td><input type="text" value="0.1" id="as_tusd_fp"></td>
               </tr>
+              </tbody>
             </table>
 
           </div>
@@ -158,8 +168,8 @@
           <div class="row">
             <b>TARIFA HORO-SAZONAL VERDE</b>
           </div>
-          <div class="row">
-            <table>
+          <div class="table-responsive">
+            <table class="table">
               <tr>
                 <td></td>
                 <td>Demanda U</td>
@@ -222,8 +232,8 @@
                 <td><input type="text" value="0.1" id="v_as_tusd_fp"></td>
               </tr>
             </table>
-
           </div>
+          
         </div>
 
 
@@ -231,8 +241,8 @@
           <div class="row">
             <b>TARIFA BRANCA</b>
           </div>
-          <div class="row">
-            <table>
+          <div class="table-responsive">
+            <table class="table">
               <tr>
                 <td></td>
                 <td>TE P</td>
@@ -267,7 +277,7 @@
               </tr>
 
             </table>
-
+          </div>
           </div>
         </div>
 
@@ -276,8 +286,8 @@
           <div class="row">
             <b> TARIFA CONVENCIONAL</b>
           </div>
-          <div class="row">
-            <table>
+          <div class="table-responsive">
+            <table class="table">
               <tr>
                 <td></td>
                 <td>TE</td>
@@ -300,7 +310,7 @@
               </tr>
 
             </table>
-
+          </div>
           </div>
         </div>
 
@@ -310,7 +320,7 @@
         </div>
 
       </div>
-      <div id="menu1" class="container tab-pane fade"><br>
+      <div id="menu1" class="col-12 tab-pane fade"><br>
         <div class="col-12">
           <div class="row">
             Estado
@@ -337,7 +347,9 @@
       </div>
 
     </div>
-
+    </div>
+    </div>
+  </div>
   </div>
   <script src="./home"></script>
 </body>

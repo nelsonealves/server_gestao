@@ -1,5 +1,5 @@
 window.addEventListener('load', (event) => {
-    _get('http://localhost:8081/all_state')
+    let all_state = _get('http://localhost:8081/all_state')
     .then(value => {
         let select_state_add = document.getElementById('sel_new_dealer');
         let select_state_tribute = document.getElementById('sel_state_tribute');
