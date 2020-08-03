@@ -8,6 +8,9 @@
   },
   "author": "Nelson Alves",
   "license": "ISC",
+  "scripts" :{
+    "play" : "nodemon server.js"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "consign": "^0.1.6",
@@ -17,7 +20,11 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.4.1",
     "fs": "0.0.1-security",
-    "mongoose": "^5.9.18"
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
+  }
 }
