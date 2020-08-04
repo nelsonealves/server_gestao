@@ -1,7 +1,7 @@
-module.exports = (express) => {
-  
+module.exports = () => {
+
     express.post('/state', (req, res) => {
-        express.controller.state.add(req, res);
+      express.controller.state.add(req, res);
     });
 
     express.get('/state/:state_id', (req, res) => {

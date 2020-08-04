@@ -1,32 +1,13 @@
-let mongoose = require('../database.js');
-let userSchema = require('../model/state');
-let modelState = mongoose.model('State', userSchema);
-let objectid = require('mongodb').ObjectID;
+const State = require('../model/State.js');
 
-module.exports.get_by_id = (req, res) => {
-    
-};
-
-module.exports.get_all = (req, res) => {
-    modelState.find({})
-    .exec(
-        (err, msg) => {
-            if(err) res.send(err);
-            res.status(200).json(msg.sort((a,b) => {
-                if (a.uf < b.uf) return -1;
-                if (a.uf > b.uf) return 1;
-                return 0;	
-                })
-            )
+module.exports.add = async (req, res) => {
+  const { uf } = req.body;
+  try {
+    const newState = await State.create({ uf });
+    return res.json(newState);
+  } catch (err) {
+    res.json({
+      error: err.original.code
     });
-
-};
-
-module.exports.update = (req, res) => {
-
-};
-
-module.exports.delete = (req, res) => {
-
-};
-
+  }
+}

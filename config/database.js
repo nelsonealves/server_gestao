@@ -6,6 +6,6 @@ module.exports = {
   password: 'root',
   database: 'gestaoFatura',
   define: {
-    timestamps: true
+    timestamps: false
   }
 }

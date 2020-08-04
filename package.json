@@ -4,13 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "play": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Nelson Alves",
   "license": "ISC",
-  "scripts" :{
-    "play" : "nodemon server.js"
-  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "consign": "^0.1.6",
@@ -26,5 +24,14 @@
   "devDependencies": {
     "nodemon": "^2.0.4",
     "sequelize-cli": "^6.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nelsonealves/server_gestao.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/nelsonealves/server_gestao/issues"
+  },
+  "homepage": "https://github.com/nelsonealves/server_gestao#readme"
 }

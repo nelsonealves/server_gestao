@@ -6,8 +6,7 @@ consign = require('consign'),
 cors = require('cors'),
 expressValidator = require('express-validator'),
 express_session = require('express-session'),
-
-
+require('./database.js');
 
 express.use(bodyParser.json());
 express.use(express_session({
@@ -21,8 +20,6 @@ express.use(cors());
 
 consign().include('routes')
 .then('controller')
-.then('model')
-.then('database.js')
 .into(express);;
 
 express.listen(process.env.PORT || 8081, function(){
@@ -30,4 +27,3 @@ express.listen(process.env.PORT || 8081, function(){
 })
 
 module.exports = express
-

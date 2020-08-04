@@ -1,54 +1,43 @@
-let mongoose = require('../database.js');
-let dealershipSchema = require('../model/dealership');
-let modelDealership = mongoose.model('Dealership', dealershipSchema);
-let stateSchema = require('../model/state');
-let modelState = mongoose.model('State', stateSchema);
-let objectid = require('mongodb').ObjectID;
+const State = require('../model/State');
+const Dealership = require('../model/Dealership');
 
-module.exports.add = (req, res) => {
-    modelState.aggregate(
-        [{
-            $match: {
-                uf: req.body.uf
-            }
-        }],
-        (err, resp1) => {
-            if (err) res.status(404);
-            req.body.idState = resp1[0]._id;
-            let Dealership = new modelDealership(req.body);
-            Dealership.save((err, resp2) => {
-                if (err) res.status(404);
-                res.status(200).send(resp2);
-            });
+module.exports.add = async (req, res) => {
+    const { 
+        name,
+        cnpj, 
+        email, 
+        tel1, 
+        tel2,
+        cep,
+        numCep,
+    } = req.body;
+  
+ 
+    const { uf } = req.params;
+    try {
+        const ufObj = await State.findByPk(uf);
+        
+        if (!ufObj) {
+            return res.status(400).json({ error: 'FOREIGN_NOT_FOUND' });
         }
-    );
     
-    
-}
-
-module.exports.get_by_id = (req, res) => {
-   
-}
-
-module.exports.get_all = (req, res) => {
-    
-}
-
-module.exports.get_all_state = (req, res) => {
-    modelDealership.find({})
-    .exec((err, resp) => {
-        if(err) res.send(err);
-        modelDealership.populate(resp, {path: 'idState', model: 'State'}, (err, resp1) => {
-            if(err) res.status(404).send(err);
-            res.status(200).send(resp1);
+        const dealership = await Dealership.create({
+            name,
+            cnpj, 
+            email, 
+            tel1, 
+            tel2,
+            cep,
+            numCep,
+            uf 
         })
-    })
-}
-
-module.exports.update = (req, res) => {
     
-}
-
-module.exports.delete = (req, res) => {
+        return res.status(200).json(dealership);
     
+    } catch (err) {
+        return res.json(err);
+    }
+
+  
+  
 }

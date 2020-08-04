@@ -1,7 +1,6 @@
 module.exports = (express) => {
     
-    express.post('/users', (req, res) => {
-        console.log(req.body);
+    express.post('/users/:idDealership', (req, res) => {
         express.controller.user.add(req, res);
     });
 
@@ -14,7 +13,7 @@ module.exports = (express) => {
     });
 
     express.get('/users', (req, res) => {
-        express.controller.user.get_all(express,req, res);
+        express.controller.user.get_all(req, res);
     });
     
     express.put('/users/:user_id', (req, res) => {
