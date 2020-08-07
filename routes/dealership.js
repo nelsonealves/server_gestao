@@ -4,12 +4,12 @@ module.exports = (express) => {
         express.controller.dealership.add(req, res);
     });
 
-    express.get('/dealership/:dealership_id', (req, res) => {
-        express.controller.dealership.get_by_id(req, res);
+    express.get('/dealership/:idDealership', (req, res) => {
+        express.controller.dealership.getById(req, res);
     });
 
     express.get('/dealerships', (req, res) => {
-        express.controller.dealership.get_all(req, res);
+        express.controller.dealership.getAll(req, res);
     });
 
     express.get('/dealerships/state', (req, res) => {

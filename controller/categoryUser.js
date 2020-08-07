@@ -28,12 +28,25 @@ module.exports.add = async (req, res) => {
             startDate
         })
     
-        return res.status(404).json(categoryUser);
+        return res.status(200).json(categoryUser);
     
     } catch (err) {
         return res.status(500).json(err);
     }
+}
 
-  
-  
+module.exports.getAllByUser = (req, res) => {
+    const { idUser } = req.params;
+
+    CategoryUser.findAll({
+        where: {
+            idUser: idUser
+        }
+    }).then(value => {
+        return res.status(200).json(value)
+    });
+}
+
+module.exports.getLatestOfUser = (req, res) => {
+
 }

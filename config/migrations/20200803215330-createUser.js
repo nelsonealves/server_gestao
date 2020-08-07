@@ -16,6 +16,10 @@ module.exports = {
          unique: true
          
       },
+      typeId: { 
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       identification: {
          type: Sequelize.STRING,
          allowNull: true,

@@ -4,13 +4,17 @@ module.exports = (express) => {
         express.controller.categoryUser.add(req, res);
     });
 
-    express.get('/category/user/:idUser', (req, res) => {
-        express.controller.categoryUser.getByUser(req, res);
+    express.get('/category/user/:idUser/all', (req, res) => {
+        express.controller.categoryUser.getAllByUser(req, res);
     });
 
-    express.get('/category/:idCategory/user/:idUser', (req, res) => {
-        express.controller.categoryUser.getByCategoryAndUser(req, res);
+    express.get('/category/user/:idUser/latest', (req, res) => {
+        express.controller.categoryUser.getLatestOfUser(req, res);
     });
+
+    // express.get('/category/:idCategory/user/:idUser', (req, res) => {
+    //     express.controller.categoryUser.getByCategoryAndUser(req, res);
+    // });
 
     // express.get('/tributes/:tributes_id', (req, res) => {
     //     express.controller.tributes.get_by_id(req, res);

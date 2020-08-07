@@ -8,6 +8,14 @@ class User extends Model {
           primaryKey: true,
           autoIncrement: true
         },
+        status: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
+        typeId: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
         name: DataTypes.STRING,
         identification: DataTypes.STRING,
         email: DataTypes.STRING,
@@ -29,7 +37,7 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Dealership, { foreignKey: 'idDealership', as: 'dealership' });
+    this.belongsTo(models.Dealership, { foreignKey: 'idDealership'});
     // this.belongsToMany(models.Category, {foreignKey: 'idUser', through: 'CategoryUser', as: 'CategoryUser'});
   }
 }

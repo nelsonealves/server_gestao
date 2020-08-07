@@ -41,3 +41,40 @@ module.exports.add = async (req, res) => {
   
   
 }
+
+module.exports.getById = async (req, res) => {
+    const { 
+        idDealership
+    } = req.params;
+  
+    try {
+        const dealership = await Dealership.findByPk(idDealership);
+    
+        /* Returns error if dealership doesnt exist */
+        if (!dealership) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        
+        return res.status(200).json(dealership);
+    
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+module.exports.getAll = async (req, res) => {
+    try {
+        const dealerships = await Dealership.findAll();
+    
+        /* Returns error if dealership doesnt exist */
+        if (!dealerships) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        
+        return res.status(200).json(dealerships);
+    
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+    
+}

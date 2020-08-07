@@ -10,7 +10,7 @@ class CategoryUser extends Model {
         },
         idUser: {
           type: DataTypes.INTEGER,
-          allowNull: true,
+          allowNull: false,
           references: {
             model: 'User',
             key: 'idUser'
@@ -18,7 +18,7 @@ class CategoryUser extends Model {
         },
         idCategory: {
           type: DataTypes.INTEGER,
-          allowNull: true,
+          allowNull: false,
           references: {
             model: 'Category',
             key: 'idCategory'

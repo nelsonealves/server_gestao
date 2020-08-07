@@ -30,9 +30,7 @@ module.exports.getAll = async (req, res) => {
         if (!category) {
             return res.status(400).json({ error: 'FOREIGN_NOT_FOUND' });
         }
-        console.log('log');
         
-    
         return res.status(404).json(category);
     
     } catch (err) {
