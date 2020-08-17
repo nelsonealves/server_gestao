@@ -8,8 +8,8 @@ module.exports = () => {
         express.controller.state.get_by_id(req, res);
     });
 
-    express.get('/all_state', (req, res) => {
-        express.controller.state.get_all(req, res);
+    express.get('/states', (req, res) => {
+        express.controller.state.getAll(req, res);
     });
 
     express.put('/state/:state_id', (req, res) => {

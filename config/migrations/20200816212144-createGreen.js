@@ -29,16 +29,20 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      idTariff:{
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      idCategoryDealership:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Tariff',
-          key: 'idTariff'
+          model: 'CategoryDealership',
+          key: 'idCategoryDealership'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
-      },
+      }
      });
 
   },

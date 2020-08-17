@@ -14,11 +14,6 @@ module.exports = {
          type: Sequelize.STRING,
          allowNull: false,
          unique: true
-         
-      },
-      typeId: { 
-        type: Sequelize.STRING,
-        allowNull: false,
       },
       identification: {
          type: Sequelize.STRING,
@@ -37,24 +32,7 @@ module.exports = {
          type: Sequelize.STRING,
          allowNull: true
       },
-      cep: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      numCep: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      idDealership:{
-        type: Sequelize.INTEGER,
-         references: {
-           model: 'Dealership',
-           key: 'idDealership'
-         },
-         onUpdate: 'CASCADE',
-         onDelete: 'CASCADE'
-       }
-
+      
      });
 
   },

@@ -1,18 +1,15 @@
 'use strict';
 
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    return queryInterface.createTable('Tariff', {
-      idTariff:{
+    return queryInterface.createTable('CDAndCU', {
+      idCDAndCU:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
       }, 
-      date:{
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
       idCategoryDealership:{
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -23,11 +20,25 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
+      idDealership:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'ConsumerUnit',
+          key: 'idConsumerUnit'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      startDate: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
      });
 
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Tariff');
+    return queryInterface.dropTable('CDAndCU');
   }
 };

@@ -8,28 +8,11 @@ class User extends Model {
           primaryKey: true,
           autoIncrement: true
         },
-        status: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
-        typeId: {
-          type: DataTypes.INTEGER,
-          allowNull: false
-        },
         name: DataTypes.STRING,
         identification: DataTypes.STRING,
         email: DataTypes.STRING,
         tel1: DataTypes.STRING,
         tel2: DataTypes.STRING,
-        cep: DataTypes.STRING,
-        numCep: DataTypes.STRING,  
-        idDealership: {
-          type: DataTypes.INTEGER,
-          references: {
-            model: 'Dealership',
-            key: 'idDealership'
-          }
-        }  
     }, {
       sequelize,
       tableName: 'User',
@@ -37,7 +20,6 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Dealership, { foreignKey: 'idDealership'});
     // this.belongsToMany(models.Category, {foreignKey: 'idUser', through: 'CategoryUser', as: 'CategoryUser'});
   }
 }

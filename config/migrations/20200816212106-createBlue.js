@@ -3,8 +3,8 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    return queryInterface.createTable('White', {
-      idWhite:{
+    return queryInterface.createTable('Blue', {
+      idBlue:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
@@ -17,7 +17,11 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      teIntermed:{
+      demandaPonta:{
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      demandaForaPonta:{
         type: Sequelize.FLOAT,
         allowNull: false,
       },
@@ -29,21 +33,25 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      idTariff:{
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      idCategoryDealership:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Tariff',
-          key: 'idTariff'
+          model: 'CategoryDealership',
+          key: 'idCategoryDealership'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
-      },
+      }
      });
 
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('White');
+    return queryInterface.dropTable('Blue');
   }
 };

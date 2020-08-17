@@ -1,28 +1,37 @@
 'use strict';
 
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    return queryInterface.createTable('Conventional', {
-      idConventional:{
+    return queryInterface.createTable('Bill', {
+      idBill:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
       }, 
-      te:{
-        type: Sequelize.FLOAT,
-        allowNull: false,
+      measures: {
+        type: Sequelize.JSON,
+        allowNull: false
       },
-      tusd:{
-        type: Sequelize.FLOAT,
-        allowNull: false,
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false
       },
-      idTariff:{
+      pis: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      cofins: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      idCDAndUC:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Tariff',
-          key: 'idTariff'
+          model: 'CDAndCU',
+          key: 'idCDAndCU'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
@@ -32,6 +41,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Conventional');
+    return queryInterface.dropTable('Bill');
   }
 };
