@@ -4,23 +4,33 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    return queryInterface.createTable('CDAndCU', {
-      idCDAndCU:{
+    return queryInterface.createTable('Contract', {
+      idContract:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
       }, 
-      idCategoryDealership:{
+      idCategory:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'CategoryDealership',
-          key: 'idCategoryDealership'
+          key: 'idCategory'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       idDealership:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'CategoryDealership',
+          key: 'idDealership'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
+      idConsumerUnit:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

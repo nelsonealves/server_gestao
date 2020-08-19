@@ -3,26 +3,30 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     
-    return queryInterface.createTable('ConsumerUnit', {
-      idConsumerUnit: {
+    return queryInterface.createTable('Infraestructure', {
+      idInfraestructure: {
          type: Sequelize.INTEGER,
          primaryKey: true,
          autoIncrement: true
       },
-      status: {
+      phases: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true,
+        //unique: true
       },
-      name: { 
-         type: Sequelize.STRING,
-         allowNull: false,
-         unique: true
+      capDisju: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
-      idUser:{
+      capTransf: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      idConsumerUnit:{
         type: Sequelize.INTEGER,
         references: {
-           model: 'User',
-           key: 'idUser'
+           model: 'ConsumerUnit',
+           key: 'idConsumerUnit'
          },
          onUpdate: 'CASCADE',
          onDelete: 'CASCADE'

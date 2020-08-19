@@ -7,6 +7,10 @@ module.exports = (express) => {
     express.get('/dealership/:idDealership', (req, res) => {
         express.controller.dealership.getById(req, res);
     });
+    
+    express.get('/dealership/:idDealership/categories', (req, res) => {
+        express.controller.dealership.getCategories(req, res);
+    });
 
     express.get('/dealerships', (req, res) => {
         express.controller.dealership.getAll(req, res);

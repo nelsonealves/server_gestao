@@ -33,16 +33,26 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
-      idCategoryDealership:{
+      idCategory:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'CategoryDealership',
-          key: 'idCategoryDealership'
+          key: 'idCategory'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
-      }
+      },
+      idDealership:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'CategoryDealership',
+          key: 'idDealership'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      },
      });
 
   },

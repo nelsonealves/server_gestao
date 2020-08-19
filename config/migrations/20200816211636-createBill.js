@@ -26,12 +26,12 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false
       },
-      idCDAndUC:{
+      idContract:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'CDAndCU',
-          key: 'idCDAndCU'
+          model: 'Contract',
+          key: 'idContract'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'

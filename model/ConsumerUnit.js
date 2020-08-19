@@ -10,7 +10,7 @@ class ConsumerUnit extends Model {
       },
       name: DataTypes.STRING,
       status: DataTypes.INTEGER,
-      identification: DataTypes.STRING,
+      
     }, {
       sequelize,
       tableName: 'ConsumerUnit',
@@ -19,7 +19,6 @@ class ConsumerUnit extends Model {
 
   static associate (models) {
     this.belongsTo(models.User, {foreignKey: 'idUser'});
-    this.belongsTo(models.Dealership, {foreignKey: 'idDealership'});
     //this.hasMany(models.User, {foreignKey: 'idDealership'});
   }
 }

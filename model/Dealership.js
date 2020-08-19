@@ -23,6 +23,7 @@ class Dealership extends Model {
 
   static associate (models) {
     this.belongsTo(models.State, {foreignKey: 'uf', as: 'state'});
+    this.belongsToMany(models.Category, {foreignKey: 'idDealership', through: 'CategoryDealership'});
     //this.hasMany(models.User, {foreignKey: 'idDealership'});
   }
 }

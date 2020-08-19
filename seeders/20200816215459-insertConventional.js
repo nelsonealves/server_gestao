@@ -4,7 +4,8 @@ module.exports = {
       te: 1,
       tusd: 1,
       date: new Date(),
-      idCategoryDealership: 4
+      idCategory: 4,
+      idDealership: 1
     }]);
   },
 

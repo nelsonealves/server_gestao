@@ -7,7 +7,8 @@ module.exports = {
       teForaPonta: 0.5,
       tusdForaPonta: 0.6,
       date: new Date(),
-      idCategoryDealership: 3
+      idCategory: 3,
+      idDealership: 1
     }]);
   },
 
