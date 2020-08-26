@@ -51,9 +51,6 @@ module.exports.getAll = async (req, res) => {
     } catch (err) {
         return res.status(500).json(err);
     }
-
-
-
 }
 
 module.exports.getAllAndJoinConsumerWithUser = async (req, res) => {
@@ -68,6 +65,28 @@ module.exports.getAllAndJoinConsumerWithUser = async (req, res) => {
         console.log(err);
         return res.status(500).json(err);
     }
+}
+
+module.exports.changeStatus = async (req, res) => {
+    
+    const {
+        idConsumerUnit,
+        status
+    } = req.params;
+
+    const user = await ConsumerUnit.findByPk(idConsumerUnit);
+
+    if (!user) return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+
+    const [numberOfAffectedRows, affectedRows] = await ConsumerUnit.update(
+        {
+            status: status
+        },{
+            where : {
+                idConsumerUnit: idConsumerUnit
+            }
+        })
+    return res.status(200).json({numberOfAffectedRows, affectedRows})
 }
 
 module.exports.JoinConsumerAndUser = async (req, res) => {

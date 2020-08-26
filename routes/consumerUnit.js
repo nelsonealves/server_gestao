@@ -7,6 +7,10 @@ module.exports = (express) => {
     express.get('/consumerUnits', (req, res) => {
         express.controller.consumerUnit.getAll(req, res);
     });
+
+    express.put('/consumerUnit/:idConsumerUnit/status/:status', (req, res) => {
+        express.controller.consumerUnit.changeStatus(req, res);
+    });
     
     express.get('/consumerUnits/user', (req, res) => {
         express.controller.consumerUnit.getAllAndJoinConsumerWithUser(req, res);
