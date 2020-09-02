@@ -14,18 +14,6 @@ module.exports = {
         type: Sequelize.JSON,
         allowNull: false
       },
-      date: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
-      pis: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
-      cofins: {
-        type: Sequelize.FLOAT,
-        allowNull: false
-      },
       idContract:{
         type: Sequelize.INTEGER,
         allowNull: false,

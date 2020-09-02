@@ -3,6 +3,7 @@ const ConsumerUnit = require('../model/ConsumerUnit');
 const Dealership = require('../model/Dealership');
 const Category = require('../model/Category');
 const CategoryDealership = require('../model/CategoryDealership');
+const Bill = require('../model/Bill');
 
 module.exports.add = async (req, res) => {
     const {
@@ -132,4 +133,28 @@ module.exports.getByConsumerUnit = async (req, res) => {
     } catch (err) {
         return res.status(500).json(err);
     }
+}
+
+module.exports.getByConsumerUnitAndBills = async (req, res) => {
+  try{  
+    const {
+        idConsumerUnit
+    } = req.params;
+    
+    const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
+
+    /* Returns error if dealership doesnt exist */
+    if (!consumerUnit) {
+        return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+    }
+    const contracts = await Contract.findAll({
+        where: {idConsumerUnit: idConsumerUnit},
+        include: [ConsumerUnit, Category, Dealership, Bill]
+        
+    });
+    return res.status(200).json(contracts);
+
+} catch (err) {
+    return res.status(500).json(err);
+}
 }

@@ -10,6 +10,7 @@ const Tribute = require('./model/Tribute.js');
 const CategoryDealership = require('./model/CategoryDealership')
 const Contract = require('./model/Contract')
 const User = require('./model/User.js');
+const Bill = require('./model/Bill.js');
 
 
 
@@ -23,6 +24,8 @@ ConsumerUnit.init(connection);
 Category.init(connection);
 Contract.init(connection);
 CategoryDealership.init(connection)
+Bill.init(connection)
+
 
 State.associate(connection.models);
 Tribute.associate(connection.models);
@@ -32,6 +35,7 @@ Category.associate(connection.models);
 ConsumerUnit.associate(connection.models);
 CategoryDealership.associate(connection.models);
 Contract.associate(connection.models);
+Bill.associate(connection.models);
 
 
 module.exports = connection;

@@ -16,11 +16,10 @@ class Contract extends Model {
   }
 
   static associate(models) {
-    //this.belongsTo(models.CategoryDealership, {foreignKey: 'idCategory'});
-    //this.belongsTo(models.CategoryDealership, {foreignKey: 'idDealership'});
     this.belongsTo(models.Dealership, {foreignKey: 'idDealership'});
     this.belongsTo(models.Category, {foreignKey: 'idCategory'});
     this.belongsTo(models.ConsumerUnit, {foreignKey: 'idConsumerUnit'});
+    this.hasMany(models.Bill, {foreignKey: 'idContract'});
   }
 }
 
