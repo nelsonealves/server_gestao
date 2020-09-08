@@ -20,6 +20,7 @@ class User extends Model {
   }
 
   static associate(models) {
+    this.hasMany(models.ConsumerUnit, {foreignKey: 'idUser'});
     // this.belongsToMany(models.Category, {foreignKey: 'idUser', through: 'CategoryUser', as: 'CategoryUser'});
   }
 }

@@ -8,7 +8,7 @@ module.exports = (express) => {
         express.controller.user.getById(req, res);
     });
 
-    express.get('/user/id/:userId/consumerUnits', (req, res) => {
+    express.get('/user/:idUser/consumerUnits', (req, res) => {
         express.controller.user.getConsumer(req, res);
     });
 

@@ -1,5 +1,6 @@
 
 const User = require('../model/User');
+const ConsumerUnit = require('../model/ConsumerUnit');
 
 module.exports.add = async (req, res) => {
     const { 
@@ -57,4 +58,17 @@ module.exports.getDealershipInclude = async (req, res) => {
         res.json(err)
     }
 
+}
+
+module.exports.getConsumer = async (req, res) => {
+    const {
+        idUser
+    } = req.params;
+
+    const users = await User.findAll({
+        where: {idUser: idUser},
+        include: [ConsumerUnit] 
+    })
+
+    return res.status(200).json(users);
 }
