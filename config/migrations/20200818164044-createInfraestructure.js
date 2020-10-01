@@ -3,8 +3,8 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     
-    return queryInterface.createTable('Infraestructure', {
-      idInfraestructure: {
+    return queryInterface.createTable('Infrastructure', {
+      idInfrastructure: {
          type: Sequelize.INTEGER,
          primaryKey: true,
          autoIncrement: true

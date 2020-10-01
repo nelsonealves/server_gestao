@@ -2,15 +2,17 @@ let Sequelize = require('sequelize');
 let dbConfig = require('./config/database.js');
 
 /*       Models       */
-const State = require('./model/State.js');
-const Dealership = require('./model/Dealership.js');
-const Category = require('./model/Category.js');
-const ConsumerUnit = require('./model/ConsumerUnit.js');
-const Tribute = require('./model/Tribute.js');
-const CategoryDealership = require('./model/CategoryDealership')
-const Contract = require('./model/Contract')
-const User = require('./model/User.js');
-const Bill = require('./model/Bill.js');
+const State = require('./model/State.js'),
+    Dealership = require('./model/Dealership.js'),
+    Category = require('./model/Category.js'),
+    ConsumerUnit = require('./model/ConsumerUnit.js'),
+    Tribute = require('./model/Tribute.js'),
+    CategoryDealership = require('./model/CategoryDealership'),
+    Contract = require('./model/Contract'),
+    User = require('./model/User.js'),
+    Bill = require('./model/Bill.js'),
+    Infrastructure = require('./model/Infrastructure');
+
 
 
 
@@ -23,9 +25,9 @@ User.init(connection);
 ConsumerUnit.init(connection);
 Category.init(connection);
 Contract.init(connection);
-CategoryDealership.init(connection)
-Bill.init(connection)
-
+CategoryDealership.init(connection);
+Bill.init(connection);
+Infrastructure.init(connection);
 
 State.associate(connection.models);
 Tribute.associate(connection.models);
@@ -36,6 +38,6 @@ ConsumerUnit.associate(connection.models);
 CategoryDealership.associate(connection.models);
 Contract.associate(connection.models);
 Bill.associate(connection.models);
-
+Infrastructure.associate(connection.models);
 
 module.exports = connection;

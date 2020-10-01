@@ -3,11 +3,15 @@ const ConsumerUnit = require('../model/ConsumerUnit');
 const Dealership = require('../model/Dealership');
 const Category = require('../model/Category');
 const CategoryDealership = require('../model/CategoryDealership');
+const Infrastructure = require('../model/Infrastructure');
 const Bill = require('../model/Bill');
 
 module.exports.add = async (req, res) => {
     const {
-        startDate
+        startDate,
+        capDisju,
+        phases,
+        capTransf
     } = req.body;
 
     const { 
@@ -24,18 +28,26 @@ module.exports.add = async (req, res) => {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
 
+        const infrastructure = await Infrastructure.create({
+            capDisju,
+            phases,
+            capTransf,
+            idConsumerUnit
+        });
+
         const contract = await Contract.create({
             idConsumerUnit,
             idDealership,
             idCategory,
             startDate: startDate
         })
-
+        console.log("ConsumerUnit");
+        console.log(consumerUnit);
         const contractJoin = await Contract.findByPk(contract.idContract,{
-            include: [ConsumerUnit, Category, Dealership]
+            include: [{model: ConsumerUnit, include: [Infrastructure]}, Category, Dealership]
         })
         console.log('contract');
-        console.log(contract);
+        console.log(ConsumerUnit);
         return res.status(200).json(contractJoin);
 
     } catch (err) {
@@ -47,7 +59,8 @@ module.exports.add = async (req, res) => {
 
 module.exports.addAndChangeStatus = async (req, res) => {
     const {
-        startDate
+        startDate,
+        
     } = req.body;
 
     const { 
@@ -73,6 +86,7 @@ module.exports.addAndChangeStatus = async (req, res) => {
             startDate: startDate
         })
 
+        
         await ConsumerUnit.update(
             {
                 status: status
@@ -81,11 +95,12 @@ module.exports.addAndChangeStatus = async (req, res) => {
                     idConsumerUnit: idConsumerUnit
                 }
             })
+            
         const contractJoin = await Contract.findByPk(contract.idContract,{
             include: [ConsumerUnit, Category, Dealership]
         })
-        console.log('contract');
-        console.log(contract);
+        
+        
         return res.status(200).json(contractJoin);
 
     } catch (err) {
