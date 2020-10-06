@@ -3,24 +3,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     
-    return queryInterface.createTable('Infrastructure', {
-      idInfrastructure: {
+    return queryInterface.createTable('Analyzes', {
+      idAnalyze: {
          type: Sequelize.INTEGER,
          primaryKey: true,
          autoIncrement: true
-      },
-      phases: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        //unique: true
-      },
-      capDisju: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      capTransf: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
       },
       idConsumerUnit:{
         type: Sequelize.INTEGER,
@@ -30,13 +17,17 @@ module.exports = {
          },
          onUpdate: 'CASCADE',
          onDelete: 'CASCADE'
-       }
+       },
+      date: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      }
 
      });
 
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Infrastructure');
+    return queryInterface.dropTable('Analyze');
   }
 };

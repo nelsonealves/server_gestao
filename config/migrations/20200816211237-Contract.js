@@ -49,6 +49,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('CDAndCU');
+    return queryInterface.dropTable('Contract');
   }
 };

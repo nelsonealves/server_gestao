@@ -19,7 +19,7 @@ class ConsumerUnit extends Model {
 
   static associate (models) {
     this.belongsTo(models.User, {foreignKey: 'idUser'});
-    this.hasMany(models.Infrastructure, {as: 'Infrastructure', foreignKey: 'idConsumerUnit'});
+    this.hasOne(models.Infrastructure, {as: 'Infrastructure', foreignKey: 'idConsumerUnit'});
     //this.hasMany(models.User, {foreignKey: 'idDealership'});
   }
 }

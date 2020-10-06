@@ -11,7 +11,8 @@ const State = require('./model/State.js'),
     Contract = require('./model/Contract'),
     User = require('./model/User.js'),
     Bill = require('./model/Bill.js'),
-    Infrastructure = require('./model/Infrastructure');
+    Infrastructure = require('./model/Infrastructure'),
+    Analyze = require('./model/Analyze');
 
 
 
@@ -28,6 +29,7 @@ Contract.init(connection);
 CategoryDealership.init(connection);
 Bill.init(connection);
 Infrastructure.init(connection);
+Analyze.init(connection);
 
 State.associate(connection.models);
 Tribute.associate(connection.models);
@@ -39,5 +41,6 @@ CategoryDealership.associate(connection.models);
 Contract.associate(connection.models);
 Bill.associate(connection.models);
 Infrastructure.associate(connection.models);
+Analyze.associate(connection.models);
 
 module.exports = connection;

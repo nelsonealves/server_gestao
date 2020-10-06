@@ -5,7 +5,7 @@ module.exports = (express) => {
     });
 
     express.get('/infrastructure/:idConsumerUnit', (req, res) => {
-        express.controller.infrastructure.get(req, res);
+        express.controller.infrastructure.getByConsumerUnit(req, res);
     });
 
     express.put('/infrastructure/:idConsumerUnit', (req, res) => {

@@ -8,7 +8,7 @@ class Infrastructure extends Model {
           primaryKey: true,
           autoIncrement: true
         },
-        capDisjut: DataTypes.INTEGER,
+        capDisju: DataTypes.INTEGER,
         phases: DataTypes.INTEGER,
         capTransf: DataTypes.INTEGER,
     }, {
