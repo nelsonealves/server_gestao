@@ -65,3 +65,29 @@ module.exports.addAndIncrementStatus = async (req, res) => {
         return res.status(500).json(err);
     }
 }
+
+
+module.exports.getByConsumerUnit = async (req, res) => {
+    try {
+        const {
+            idConsumerUnit
+        } = req.params;
+        
+        const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
+
+        /* Returns error if dealership doesnt exist */
+        if (!consumerUnit) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        const analyzes = await Analyze.findAll({
+            where: {idConsumerUnit: idConsumerUnit},
+            // include: [ConsumerUnit, Category, Dealership]
+            
+              
+        });
+        return res.status(200).json(analyzes);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}

@@ -7,8 +7,8 @@ module.exports = (express) => {
         express.controller.analyze.addAndIncrementStatus(req, res);
     });
 
-    express.get('/analyze/:idAnalyze', (req, res) => {
-        express.controller.analyze.getById(req, res);
+    express.get('/analyze/:idConsumerUnit', (req, res) => {
+        express.controller.analyze.getByConsumerUnit(req, res);
     });
     
     express.get('/analyze/:idAnalyze/scenarios', (req, res) => {
