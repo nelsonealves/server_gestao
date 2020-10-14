@@ -16,6 +16,10 @@ module.exports = (express) => {
         express.controller.contract.getByConsumerUnit(req, res);
     });
 
+    express.get('/contract/consumerUnit/:idConsumerUnit/analyzes', (req, res) => {
+        express.controller.contract.getAnalyzes(req, res);
+    });
+
     express.get('/contract/consumerUnit/:idConsumerUnit/bills', (req, res) => {
         express.controller.contract.getByConsumerUnitAndBills(req, res);
     });

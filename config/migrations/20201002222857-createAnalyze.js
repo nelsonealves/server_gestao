@@ -9,11 +9,11 @@ module.exports = {
          primaryKey: true,
          autoIncrement: true
       },
-      idConsumerUnit:{
+      idContract:{
         type: Sequelize.INTEGER,
         references: {
-           model: 'ConsumerUnit',
-           key: 'idConsumerUnit'
+           model: 'Contract',
+           key: 'idContract'
          },
          onUpdate: 'CASCADE',
          onDelete: 'CASCADE'
@@ -28,6 +28,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Analyze');
+    return queryInterface.dropTable('Analyzes');
   }
 };

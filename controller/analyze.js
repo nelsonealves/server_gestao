@@ -1,5 +1,6 @@
 const Analyze = require('../model/Analyze');
 const ConsumerUnit = require('../model/ConsumerUnit');
+const Contract = require('../model/Contract');
 
 module.exports.add = async (req, res) => {
     const {
@@ -7,17 +8,17 @@ module.exports.add = async (req, res) => {
     } = req.body;
   
 
-    const { idConsumerUnit } = req.params;
+    const { idContract } = req.params;
     try {
-        const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
+        const contract = await Contract.findByPk(idContract);
         
-        if (!consumerUnit) {
+        if (!contract) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
 
         const analyze = await Analyze.create({
             date,
-            idConsumerUnit
+            idContract
         })
      
         return res.status(200).json(analyze);
@@ -36,19 +37,19 @@ module.exports.addAndIncrementStatus = async (req, res) => {
   
 
     const { 
-        idConsumerUnit,
+        idContract,
         status
      } = req.params;
     try {
-        const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
+        const contract = await Contract.findByPk(idContract);
         
-        if (!consumerUnit) {
+        if (!contract) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
 
         const analyze = await Analyze.create({
             date,
-            idConsumerUnit
+            idContract
         })
         
         await ConsumerUnit.update(
@@ -56,7 +57,7 @@ module.exports.addAndIncrementStatus = async (req, res) => {
                 status: status
             },{
                 where : {
-                    idConsumerUnit: idConsumerUnit
+                    idConsumerUnit: contract.idConsumerUnit
                 }
             })
         return res.status(200).json(analyze);
@@ -67,22 +68,21 @@ module.exports.addAndIncrementStatus = async (req, res) => {
 }
 
 
-module.exports.getByConsumerUnit = async (req, res) => {
+module.exports.getByContract = async (req, res) => {
     try {
         const {
-            idConsumerUnit
+            idContract
         } = req.params;
         
-        const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
+        const contract = await Contract.findByPk(idContract);
 
-        /* Returns error if dealership doesnt exist */
-        if (!consumerUnit) {
+        /* Return error if contract doesnt exist */
+        if (!contract) {
             return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
         }
         const analyzes = await Analyze.findAll({
-            where: {idConsumerUnit: idConsumerUnit},
+            where: {idContract: idContract},
             // include: [ConsumerUnit, Category, Dealership]
-            
               
         });
         return res.status(200).json(analyzes);

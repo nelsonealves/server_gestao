@@ -1,14 +1,14 @@
 module.exports = (express) => {
   
-    express.post('/analyze/:idConsumerUnit', (req, res) => {
+    express.post('/analyze/:idContract', (req, res) => {
         express.controller.analyze.add(req, res);
     });
-    express.post('/analyze/:idConsumerUnit/status/:status', (req, res) => {
+    express.post('/analyze/:idContract/status/:status', (req, res) => {
         express.controller.analyze.addAndIncrementStatus(req, res);
     });
 
-    express.get('/analyze/:idConsumerUnit', (req, res) => {
-        express.controller.analyze.getByConsumerUnit(req, res);
+    express.get('/analyze/:idContract', (req, res) => {
+        express.controller.analyze.getByContract(req, res);
     });
     
     express.get('/analyze/:idAnalyze/scenarios', (req, res) => {

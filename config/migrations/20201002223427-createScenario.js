@@ -4,13 +4,14 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     
     return queryInterface.createTable('Scenario', {
-      idScenario: {
-         type: Sequelize.INTEGER,
-         primaryKey: true,
-         autoIncrement: true
-      },
+      // idScenario: {
+      //    type: Sequelize.INTEGER,
+      //    primaryKey: true,
+      //    autoIncrement: true
+      // },
       idAnalyze:{
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
            model: 'Analyzes',
            key: 'idAnalyze'
@@ -18,18 +19,26 @@ module.exports = {
          onUpdate: 'CASCADE',
          onDelete: 'CASCADE'
        },
-      economy: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      investiment: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      payback: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
+       idCategory:{
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        references: {
+           model: 'CategoryDealership',
+           key: 'idCategory'
+         },
+         onUpdate: 'CASCADE',
+         onDelete: 'CASCADE'
+       },
+       idDealeship:{
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        references: {
+           model: 'CategoryDealership',
+           key: 'idDealership'
+         },
+         onUpdate: 'CASCADE',
+         onDelete: 'CASCADE'
+       },
      });
 
   },

@@ -20,7 +20,7 @@ class Analyze extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.ConsumerUnit, { foreignKey: 'idConsumerUnit' });
+        this.belongsTo(models.Contract, { foreignKey: 'idContract' });
         //this.hasMany(models.User, {foreignKey: 'idDealership'});
     }
 }
