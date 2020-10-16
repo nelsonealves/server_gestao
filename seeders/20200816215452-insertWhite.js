@@ -4,6 +4,7 @@ module.exports = {
       tePonta: 1,
       tusdPonta: 1,
       teIntermed: 0.4,
+      tusdIntermed: 0.6,
       teForaPonta: 0.5,
       tusdForaPonta: 0.6,
       date: new Date(),

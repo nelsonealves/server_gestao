@@ -1,9 +1,9 @@
 module.exports = (express) => {
   
-    express.post('/analyze/:idContract', (req, res) => {
+    express.post('/analyze/:idContract/', (req, res) => {
         express.controller.analyze.add(req, res);
     });
-    express.post('/analyze/:idContract/status/:status', (req, res) => {
+    express.post('/analyze/contract/:idContract/category/:idCategory/dealership/:idDealership/status/:status', (req, res) => {
         express.controller.analyze.addAndIncrementStatus(req, res);
     });
 

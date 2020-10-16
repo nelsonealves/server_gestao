@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class Analyze extends Model {
     static init(sequelize) {
         super.init({
-            idAnalyze: {
+            idAnalyzes: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true
@@ -12,7 +12,7 @@ class Analyze extends Model {
                 type: DataTypes.DATE,
                 allowNull: false
             },
-            
+
         }, {
             sequelize,
             tableName: 'Analyzes',
@@ -21,7 +21,7 @@ class Analyze extends Model {
 
     static associate(models) {
         this.belongsTo(models.Contract, { foreignKey: 'idContract' });
-        //this.hasMany(models.User, {foreignKey: 'idDealership'});
+     //   this.hasMany(models.Scenario, { as: 'Scenario', foreignKey: 'idScenario' });
     }
 }
 

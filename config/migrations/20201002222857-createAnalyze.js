@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     
     return queryInterface.createTable('Analyzes', {
-      idAnalyze: {
+      idAnalyzes: {
          type: Sequelize.INTEGER,
          primaryKey: true,
          autoIncrement: true
@@ -18,6 +18,15 @@ module.exports = {
          onUpdate: 'CASCADE',
          onDelete: 'CASCADE'
        },
+      //  idScenario:{
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //      model: 'Scenario',
+      //      key: 'idScenario'
+      //    },
+      //    onUpdate: 'CASCADE',
+      //    onDelete: 'CASCADE'
+      //  },
       date: {
         type: Sequelize.DATE,
         allowNull: true,

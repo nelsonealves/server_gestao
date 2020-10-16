@@ -8,8 +8,8 @@ module.exports = (express) => {
         express.controller.green.add_many(req, res);
     });
 
-    express.get('/green/:idGreen', (req, res) => {
-        express.controller.green.get_by_id(req, res);
+    express.get('/green/dealership/:idDealership/category/:idCategory', (req, res) => {
+        express.controller.green.getDealershipCategory(req, res);
     });
 
     express.get('/green/all', (req, res) => {

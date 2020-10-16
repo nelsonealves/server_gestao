@@ -21,6 +21,10 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
+      tusdIntermed:{
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
       teForaPonta:{
         type: Sequelize.FLOAT,
         allowNull: false,

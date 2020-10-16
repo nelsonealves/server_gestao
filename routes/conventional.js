@@ -8,8 +8,8 @@ module.exports = (express) => {
         express.controller.conventional.add_many(req, res);
     });
 
-    express.get('/conventional/:idConventional', (req, res) => {
-        express.controller.conventional.get_by_id(req, res);
+    express.get('/conventional/dealership/:idDealership/category/:idCategory', (req, res) => {
+        express.controller.conventional.getDealershipCategory(req, res);
     });
 
     express.get('/conventional/all', (req, res) => {

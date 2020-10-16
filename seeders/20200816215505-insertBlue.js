@@ -8,7 +8,7 @@ module.exports = {
       teForaPonta: 0.5,
       tusdForaPonta: 0.6,
       date: new Date(),
-      idCategory: 2,
+      idCategory: 1,
       idDealership: 1
     },{
       demandaPonta: 0.2,
@@ -18,7 +18,7 @@ module.exports = {
       teForaPonta: 0.7,
       tusdForaPonta: 0.8,
       date: new Date(),
-      idCategory: 2,
+      idCategory: 1,
       idDealership: 2
     }]);
   },
