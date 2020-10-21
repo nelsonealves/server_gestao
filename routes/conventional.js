@@ -1,6 +1,6 @@
 module.exports = (express) => {
   
-    express.post('/conventional', (req, res) => {
+    express.post('/conventional/:idTariff', (req, res) => {
         express.controller.conventional.add(req, res);
     });
 

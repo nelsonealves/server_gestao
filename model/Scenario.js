@@ -19,8 +19,7 @@ class Scenario extends Model {
 
     static associate(models) {
         this.belongsTo(models.Analyze, { foreignKey: 'idAnalyzes' });
-        this.belongsTo(models.CategoryDealership, { foreignKey: 'idCategory' });
-        this.belongsTo(models.CategoryDealership, { foreignKey: 'idDealership' });
+        this.belongsTo(models.Tariff, { foreignKey: 'idTariff' });
     }
 }
 

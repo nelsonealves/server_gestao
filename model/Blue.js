@@ -14,8 +14,7 @@ class Blue extends Model {
         demandaForaPonta: DataTypes.FLOAT,
         tusdForaPonta: DataTypes.FLOAT,
         teForaPonta: DataTypes.FLOAT,
-        date: DataTypes.DATE,
-
+       
     }, {
       sequelize,
       tableName: 'Blue',
@@ -23,8 +22,7 @@ class Blue extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.CategoryDealership, {foreignKey: 'idCategory'});
-    this.belongsTo(models.CategoryDealership, {foreignKey: 'idDealership'});
+    this.belongsTo(models.Tariff, {foreignKey: 'idTariff', targetKey: 'idTariff'});
   }
 }
 

@@ -6,6 +6,8 @@ const CategoryDealership = require('../model/CategoryDealership');
 const Infrastructure = require('../model/Infrastructure');
 const Bill = require('../model/Bill');
 const Analyze = require('../model/Analyze');
+const Scenario = require('../model/Scenario');
+const Tariff = require('../model/Tariff');
 module.exports.add = async (req, res) => {
     const {
         startDate,
@@ -188,7 +190,7 @@ module.exports.getAnalyzes = async (req, res) => {
         }
         const contracts = await Contract.findAll({
             where: { idConsumerUnit: idConsumerUnit },
-            include: [Analyze]
+            include: [{ model: Analyze}]
 
         });
         return res.status(200).json(contracts);

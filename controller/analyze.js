@@ -2,6 +2,8 @@ const Analyze = require('../model/Analyze');
 const ConsumerUnit = require('../model/ConsumerUnit');
 const Contract = require('../model/Contract');
 const Scenario = require('../model/Scenario');
+const Tariff = require('../model/Tariff');
+
 module.exports.add = async (req, res) => {
     const {
         date
@@ -44,43 +46,44 @@ module.exports.addAndIncrementStatus = async (req, res) => {
     } = req.params;
     try {
         const contract = await Contract.findByPk(idContract);
-
-        if (!contract) {
+        const tariff = await Tariff.findAll({
+            where: {idDealership, idCategory},
+        });
+        console.log('contract');
+        console.log(contract.idContract);
+        console.log('tariff');        
+        console.log(date);
+        
+        if (!contract || !tariff[0].idTariff) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
 
         const analyzeCreate = await Analyze.create({
-            date,
+            date: new Date(),
             idContract
         })
 
         const scenario = await Scenario.create({
-            idAnalyzes: analyzeCreate.idAnalyzes,
-            idCategory: parseInt(idCategory),
-            idDealership: parseInt(idDealership)
-        });
-        // const scenario = await analyzeCreate.addScenario([{
-        //     idAnalyze: analyzeCreate.idAnalyzes,
-        //     idCategory: parseInt(idCategory),
-        //     idDealership: parseInt(idDealership)
-        // }]);
-        
-        
-        await Analyze.update({ idScenario: scenario.idScenario }, {
-            where: {
-                idAnalyzes: analyzeCreate.idAnalyzes
-            }
-        });
+            idAnalyzes: parseInt(analyzeCreate.idAnalyzes),
+            idTariff: tariff[0].idTariff,
+            investiment: 0,
+            valueTotal: 0,
+            payback: 0 
+        })
 
-        const analyzeResult = await Analyze.findAll({
-            attributes: ['idAnalyzes', 'idContract', 'date', 'idScenario'],
-            where: {
-                idAnalyzes: analyzeCreate.idAnalyzes
-            }
-        });
+        analyzeCreate.idScenario = scenario.idScenario;
+        await analyzeCreate.save();
 
-        console.log(analyzeResult);
-        return res.status(200).json(analyzeResult[0]);
+
+        // const analyzeResult = await Analyze.findAll({
+        //     attributes: ['idAnalyzes', 'idContract', 'date', 'idScenario'],
+        //     where: {
+        //         idAnalyzes: analyzeCreate.idAnalyzes
+        //     }
+        // });
+
+
+        return res.status(200).json(analyzeCreate);
 
     } catch (err) {
         return res.status(500).json(err);
@@ -100,9 +103,9 @@ module.exports.getByContract = async (req, res) => {
         if (!contract) {
             return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
         }
-        const analyzes = await Analyze.findAll({
+        const analyzes = await Analyze.findOne({
             where: { idContract: idContract },
-            // include: [ConsumerUnit, Category, Dealership]
+            include: [Scenario]
 
         });
         return res.status(200).json(analyzes);
@@ -110,4 +113,31 @@ module.exports.getByContract = async (req, res) => {
     } catch (err) {
         return res.status(500).json(err);
     }
+}
+
+
+module.exports.update = async (req, res) => {
+    const {
+        idAnalyzes
+    } = req.params;
+
+    try {
+
+        const analyze = Analyze.findByPk(idAnalyzes);
+
+        if (!analyze) {
+            return res.status(404).json({ error: "OBJ_NOT_FOUND" });
+        }
+
+        const analyzeUpdate = await Analyze.update({  }, {
+            where: {
+                idAnalyzes: analyzeCreate.idAnalyzes
+            }
+        });
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+
+
 }

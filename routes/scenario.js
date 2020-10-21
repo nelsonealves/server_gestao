@@ -1,15 +1,15 @@
 module.exports = (express) => {
   
-    express.post('/scenario/:idAnalyze/category/:idCategory/dealership/:idDealership', (req, res) => {
+    express.post('/scenario/:idAnalyzes/category/:idCategory/dealership/:idDealership', (req, res) => {
         express.controller.scenario.add(req, res);
     });
 
-    // express.get('/scenario/:idContract', (req, res) => {
-    //     express.controller.scenario.getByContract(req, res);
+    // express.post('/scenarios/:idAnalyzes/category/:idCategory/dealership/:idDealership', (req, res) => {
+    //     express.controller.scenario.addMany(req, res);
     // });
-    
-    express.get('/scenario/:idAnalyze/scenarios', (req, res) => {
-        express.controller.scenario.getIncludeScenarios(req, res);
+
+    express.get('/scenario/:idAnalyzes', (req, res) => {
+        express.controller.scenario.getByAnalyzes(req, res);
     });
 
     express.put('/scenario/:idScenario/analyze/:idAnalyze', (req, res) => {

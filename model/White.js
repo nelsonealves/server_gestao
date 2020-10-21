@@ -3,10 +3,9 @@ const { Model, DataTypes } = require('sequelize');
 class White extends Model {
   static init(sequelize) {
     super.init({
-        idWhite: {
+        idTariff: {
           type: DataTypes.INTEGER,
           primaryKey: true,
-          autoIncrement: true
         },
         tePonta: DataTypes.FLOAT,
         tusdPonta: DataTypes.FLOAT,
@@ -14,8 +13,6 @@ class White extends Model {
         tusdIntermed: DataTypes.FLOAT,
         teForaPonta: DataTypes.FLOAT,
         tusdForaPonta: DataTypes.FLOAT,
-        date: DataTypes.DATE,
-
     }, {
       sequelize,
       tableName: 'White',
@@ -23,8 +20,8 @@ class White extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.CategoryDealership, {foreignKey: 'idCategory'});
-    this.belongsTo(models.CategoryDealership, {foreignKey: 'idDealership'});
+    this.belongsTo(models.Tariff, {foreignKey: 'idTariff', targetKey: 'idTariff'});
+    
   }
 }
 

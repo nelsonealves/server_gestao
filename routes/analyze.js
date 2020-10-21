@@ -19,7 +19,7 @@ module.exports = (express) => {
         express.controller.analyze.getAllOfConsumerUnit(req, res);
     });
 
-    express.put('/analyze/:analyze_id', (req, res) => {
+    express.put('/analyze/:idAnalyzes', (req, res) => {
         express.controller.analyze.update(req, res);
     });
 

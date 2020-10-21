@@ -17,7 +17,8 @@ const State = require('./model/State.js'),
     Conventional = require('./model/Conventional'),
     White = require('./model/White'),
     Green = require('./model/Green'),
-    Blue = require('./model/Blue');
+    Blue = require('./model/Blue'),
+    Tariff = require('./model/Tariff');
 
 
 
@@ -33,6 +34,7 @@ Category.init(connection);
 Contract.init(connection);
 CategoryDealership.init(connection);
 Bill.init(connection);
+Tariff.init(connection);
 Infrastructure.init(connection);
 Analyze.init(connection);
 Scenario.init(connection);
@@ -40,6 +42,7 @@ Conventional.init(connection);
 White.init(connection);
 Green.init(connection);
 Blue.init(connection);
+
 
 
 
@@ -52,10 +55,11 @@ ConsumerUnit.associate(connection.models);
 CategoryDealership.associate(connection.models);
 Contract.associate(connection.models);
 Bill.associate(connection.models);
+Tariff.associate(connection.models);
 Infrastructure.associate(connection.models);
 Analyze.associate(connection.models);
 Scenario.associate(connection.models);
-Analyze.hasMany(connection.models.Scenario, {as: 'Scenario', foreignKey: 'idScenario'});
+//Analyze.hasMany(connection.models.Scenario, {as: 'Scenario', foreignKey: 'idScenario'});
 Conventional.associate(connection.models);
 White.associate(connection.models);
 Green.associate(connection.models);

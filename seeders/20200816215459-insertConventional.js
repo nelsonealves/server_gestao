@@ -1,15 +1,34 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return await queryInterface.bulkInsert('Conventional', [{
-      te: 1,
-      tusd: 1,
-      date: new Date(),
-      idCategory: 4,
-      idDealership: 1
-    }]);
+    const transaction = await queryInterface.sequelize.transaction();
+    try {
+      const tariff = await queryInterface.bulkInsert('Tariff',[{
+        idCategory: 4,
+        idDealership: 1,
+        date: new Date()
+      }])
+
+      await queryInterface.bulkInsert('Conventional', [{
+        te: 1,
+        tusd: 1,
+        idTariff: tariff
+      }]);
+      await transaction.commit();
+    } catch (err) {
+      await transaction.rollback();
+      throw err;
+    }
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Conventional', null, {});
+     const transaction = await queryInterface.sequelize.transaction();
+    try {
+      await queryInterface.bulkDelete('Tariff', null, {});
+      await queryInterface.bulkDelete('Green', null, {});
+      await transaction.commit()
+    } catch (err) {
+      await transaction.rollback();
+      throw err;
+    }
   }
 };

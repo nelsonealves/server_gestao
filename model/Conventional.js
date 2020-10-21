@@ -3,23 +3,21 @@ const { Model, DataTypes } = require('sequelize');
 class Conventional extends Model {
   static init(sequelize) {
     super.init({
-        idConventional: {
+        idTariff: {
           type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true
+          primaryKey: true
         },
         te: DataTypes.FLOAT,
         tusd: DataTypes.FLOAT,
-        date: DataTypes.DATE,
     }, {
+      freezeTableName: true,
       sequelize,
       tableName: 'Conventional',
     });
   }
 
   static associate(models) {
-    this.belongsTo(models.CategoryDealership, {foreignKey: 'idCategory'});
-    this.belongsTo(models.CategoryDealership, {foreignKey: 'idDealership'});
+    this.belongsTo(models.Tariff, {foreignKey: 'idTariff', targetKey: 'idTariff'});
   }
 }
 

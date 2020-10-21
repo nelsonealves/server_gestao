@@ -9,34 +9,17 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      // idAnalyze: {
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: 'Analyze',
-      //     key: 'idAnalyze'
-      //   },
-      //   onUpdate: 'CASCADE',
-      //   onDelete: 'CASCADE'
-      // },
-      idCategory: {
+      idTariff:{
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'CategoryDealership',
-          key: 'idCategory'
+          model: 'Tariff',
+          key: 'idTariff'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      idDealership: {
-        type: Sequelize.INTEGER,
-
-        references: {
-          model: 'CategoryDealership',
-          key: 'idDealership'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
+      
       investiment: {
         type: Sequelize.FLOAT,
         allowNull: true,
