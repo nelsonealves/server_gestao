@@ -1,37 +1,37 @@
 'use strict';
 
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
-    return queryInterface.createTable('CategoryDealership', {
-      idCategory:{
+    return queryInterface.createTable('DemandContracted', {
+      idScenario:{
         type: Sequelize.INTEGER,
-        allowNull: false,
         primaryKey: true,
         references: {
-          model: 'Category',
-          key: 'idCategory'
+          model: 'Scenario',
+          key: 'idScenario'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      idDealership:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
+      period:{
+        type: Sequelize.STRING,
         primaryKey: true,
         references: {
-          model: 'Dealership',
-          key: 'idDealership'
+          model: 'Period',
+          key: 'type'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-     });
-
+      
+      measured: {
+        type: Sequelize.JSON,
+        allowNull: true,
+      },
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
-    return await queryInterface.dropTable('CategoryDealership');
+    return await queryInterface.dropTable('DemandContracted');
   }
 };

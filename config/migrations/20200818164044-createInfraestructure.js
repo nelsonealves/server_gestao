@@ -37,6 +37,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Infrastructure');
+    return await queryInterface.dropTable('Infrastructure');
   }
 };

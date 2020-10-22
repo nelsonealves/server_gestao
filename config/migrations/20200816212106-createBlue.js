@@ -43,6 +43,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Blue');
+    return await queryInterface.dropTable('Blue');
   }
 };
