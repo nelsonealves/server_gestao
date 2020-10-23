@@ -18,7 +18,11 @@ const State = require('./model/State.js'),
     White = require('./model/White'),
     Green = require('./model/Green'),
     Blue = require('./model/Blue'),
-    Tariff = require('./model/Tariff');
+    Tariff = require('./model/Tariff'),
+    Period = require('./model/Period'),
+    Consum = require('./model/Consum'),
+    Demand = require('./model/Demand'),
+    DemandContracted = require('./model/DemandContracted');
 
 
 
@@ -42,6 +46,11 @@ Conventional.init(connection);
 White.init(connection);
 Green.init(connection);
 Blue.init(connection);
+Period.init(connection);
+Consum.init(connection);
+Demand.init(connection);
+DemandContracted.init(connection);
+
 
 
 
@@ -64,5 +73,9 @@ Conventional.associate(connection.models);
 White.associate(connection.models);
 Green.associate(connection.models);
 Blue.associate(connection.models);
+Period.associate(connection.models);
+Consum.associate(connection.models);
+Demand.associate(connection.models);
+DemandContracted.associate(connection.models);
 
 module.exports = connection;
