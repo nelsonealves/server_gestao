@@ -4,7 +4,7 @@ module.exports = (express) => {
         express.controller.scenario.add(req, res);
     });
 
-    // express.post('/scenarios/:idAnalyzes/category/:idCategory/dealership/:idDealership', (req, res) => {
+    // express.post('/scenarios/:idAnalyzes/category/:idCategory/dealership/:idDealership/all', (req, res) => {
     //     express.controller.scenario.addMany(req, res);
     // });
 
