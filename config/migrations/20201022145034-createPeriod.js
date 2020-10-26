@@ -3,9 +3,14 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.createTable('Period', {
-      type: {
-        type: Sequelize.STRING,
+      idPeriod: {
+        type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true
+      },
+      period: {
+        type: Sequelize.STRING,
+        
       },
      
     });

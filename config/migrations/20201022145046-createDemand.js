@@ -13,18 +13,26 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      period:{
-        type: Sequelize.STRING,
+      idPeriod:{
+        type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
           model: 'Period',
-          key: 'type'
+          key: 'idPeriod'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       
       measured: {
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
+      optimized: {
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
+      contracted: {
         type: Sequelize.JSON,
         allowNull: true,
       },

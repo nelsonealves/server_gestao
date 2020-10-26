@@ -1,15 +1,15 @@
 module.exports = (express) => {
   
     express.post('/consum/:idScenario', (req, res) => {
-        express.controller.dealership.add(req, res);
+        express.controller.consum.add(req, res);
     });
 
     express.post('/consum/:idScenario/all', (req, res) => {
-        express.controller.dealership.addMany(req, res);
+        express.controller.consum.addMany(req, res);
     });
 
     express.get('/consum/:idScenario/all', (req, res) => {
-        express.controller.dealership.getAll(req, res);
+        express.controller.consum.getAllByScenario(req, res);
     });
 
 }

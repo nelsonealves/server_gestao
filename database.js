@@ -50,7 +50,7 @@ Period.init(connection);
 Consum.init(connection);
 Demand.init(connection);
 DemandContracted.init(connection);
-
+Consum.removeAttribute('id')
 
 
 

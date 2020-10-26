@@ -12,7 +12,7 @@ class DemandContracted extends Model {
 
   static associate (models) {
     this.belongsTo(models.Scenario, {foreignKey: 'idScenario', targetKey: 'idScenario'});
-    this.belongsTo(models.Period, {foreignKey: 'type', targetKey: 'type'});
+    this.belongsTo(models.Period, {foreignKey: 'idPeriod', targetKey: 'idPeriod'});
   }
 }
 

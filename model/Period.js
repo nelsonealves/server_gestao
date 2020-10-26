@@ -3,9 +3,13 @@ const { Model, DataTypes } = require('sequelize');
 class Period extends Model {
   static init(sequelize) {
     super.init({
-      type: {
-        type: DataTypes.STRING,
+      idPeriod: {
+        type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
+      },
+      period: {
+        type: DataTypes.STRING,
       },
       
     }, {

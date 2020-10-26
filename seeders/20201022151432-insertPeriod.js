@@ -3,13 +3,13 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return await queryInterface.bulkInsert('Period', [{
-      type: 'unique'
+      period: 'unique'
     }, {
-      type: 'ponta'
+      period: 'ponta'
     }, {
-      type: 'foraPonta'
+      period: 'foraPonta'
     }, {
-      type: 'intermediario'
+      period: 'intermediario'
     }]);
   },
 

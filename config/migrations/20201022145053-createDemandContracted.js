@@ -13,12 +13,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      period:{
-        type: Sequelize.STRING,
+      idPeriod:{
+        type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
           model: 'Period',
-          key: 'type'
+          key: 'idPeriod'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
