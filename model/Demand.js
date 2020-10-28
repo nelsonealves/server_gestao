@@ -4,6 +4,10 @@ class Demand extends Model {
   static init(sequelize) {
     super.init({
       measured: DataTypes.JSON,
+      contracted: DataTypes.JSON,
+      optimized: DataTypes.JSON,
+      datasets: DataTypes.JSON,
+      status: DataTypes.INTEGER
     }, {
       sequelize,
       tableName: 'Demand',

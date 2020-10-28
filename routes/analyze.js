@@ -10,6 +10,10 @@ module.exports = (express) => {
     express.get('/analyze/:idContract', (req, res) => {
         express.controller.analyze.getByContract(req, res);
     });
+
+    express.get('/analyzes', (req, res) => {
+        express.controller.analyze.getAllAnalyzes(req, res);
+    });
     
     express.get('/analyze/:idAnalyze/scenarios', (req, res) => {
         express.controller.analyze.getIncludeScenarios(req, res);

@@ -21,8 +21,8 @@ const State = require('./model/State.js'),
     Tariff = require('./model/Tariff'),
     Period = require('./model/Period'),
     Consum = require('./model/Consum'),
-    Demand = require('./model/Demand'),
-    DemandContracted = require('./model/DemandContracted');
+    Demand = require('./model/Demand');
+    
 
 
 
@@ -49,8 +49,9 @@ Blue.init(connection);
 Period.init(connection);
 Consum.init(connection);
 Demand.init(connection);
-DemandContracted.init(connection);
+
 Consum.removeAttribute('id')
+Demand.removeAttribute('id')
 
 
 
@@ -76,6 +77,6 @@ Blue.associate(connection.models);
 Period.associate(connection.models);
 Consum.associate(connection.models);
 Demand.associate(connection.models);
-DemandContracted.associate(connection.models);
+
 
 module.exports = connection;

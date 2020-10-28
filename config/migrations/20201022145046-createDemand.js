@@ -36,6 +36,14 @@ module.exports = {
         type: Sequelize.JSON,
         allowNull: true,
       },
+      datasets: {
+        type: Sequelize.JSON,
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }
     });
   },
 

@@ -37,7 +37,7 @@ module.exports.getAllByScenario = async (req, res) => {
             idScenario
         } = req.params;
 
-        const scenario = await Scenario.findByPk(idAnalyzes);
+        const scenario = await Scenario.findByPk(idScenario);
 
         /* Return error if contract doesnt exist */
         if (!scenario) {
@@ -45,12 +45,38 @@ module.exports.getAllByScenario = async (req, res) => {
         }
         const consum = await Consum.findAll(
             {
-                where:{idAnalyzes: idScenario},
+                where:{idScenario: idScenario},
                 
             }
         );
 
         return res.status(200).json(consum);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+module.exports.getByScenario = async (req, res) => {
+    try {
+        const {
+            idScenario
+        } = req.params;
+
+        const scenario = await Scenario.findByPk(idScenario);
+
+        /* Return error if contract doesnt exist */
+        if (!scenario) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        const consums = await Consum.findAll(
+            {
+                where:{idScenario: idScenario},
+                
+            }
+        );
+
+        return res.status(200).json(consums);
 
     } catch (err) {
         return res.status(500).json(err);

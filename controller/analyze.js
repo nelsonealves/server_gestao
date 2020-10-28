@@ -47,13 +47,13 @@ module.exports.addAndIncrementStatus = async (req, res) => {
     try {
         const contract = await Contract.findByPk(idContract);
         const tariff = await Tariff.findAll({
-            where: {idDealership, idCategory},
+            where: { idDealership, idCategory },
         });
         console.log('contract');
         console.log(contract.idContract);
-        console.log('tariff');        
+        console.log('tariff');
         console.log(date);
-        
+
         if (!contract || !tariff[0].idTariff) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
@@ -68,7 +68,7 @@ module.exports.addAndIncrementStatus = async (req, res) => {
             idTariff: tariff[0].idTariff,
             investiment: 0,
             valueTotal: 0,
-            payback: 0 
+            payback: 0
         })
 
         analyzeCreate.idScenario = scenario.idScenario;
@@ -105,6 +105,43 @@ module.exports.getByContract = async (req, res) => {
         }
         const analyzes = await Analyze.findOne({
             where: { idContract: idContract },
+        });
+        return res.status(200).json(analyzes);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+module.exports.getAllAnalyzes = async (req, res) => {
+    try {
+        const {
+            idContract
+        } = req.params;
+
+        
+        const analyzes = await Analyze.findAll();
+        return res.status(200).json(analyzes);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+module.exports.getIncludeScenarios = async (req, res) => {
+    try {
+        const {
+            idContract
+        } = req.params;
+
+        const contract = await Contract.findByPk(idContract);
+
+        /* Return error if contract doesnt exist */
+        if (!contract) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        const analyzes = await Analyze.findOne({
+            where: { idContract: idContract },
             include: [Scenario]
 
         });
@@ -114,7 +151,6 @@ module.exports.getByContract = async (req, res) => {
         return res.status(500).json(err);
     }
 }
-
 
 module.exports.update = async (req, res) => {
     const {
@@ -129,7 +165,7 @@ module.exports.update = async (req, res) => {
             return res.status(404).json({ error: "OBJ_NOT_FOUND" });
         }
 
-        const analyzeUpdate = await Analyze.update({  }, {
+        const analyzeUpdate = await Analyze.update({}, {
             where: {
                 idAnalyzes: analyzeCreate.idAnalyzes
             }
