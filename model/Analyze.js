@@ -21,7 +21,7 @@ class Analyze extends Model {
 
     static associate(models) {
         this.belongsTo(models.Contract, { foreignKey: 'idContract' });
-        this.hasMany(models.Scenario, {as: 'scenarios', foreignKey: 'idScenario' });
+        this.hasMany(models.Scenario, {as: 'scenarios', foreignKey: 'idAnalyzes' });
         this.belongsTo(models.Scenario, { foreignKey: 'idScenario' });
     }
 }

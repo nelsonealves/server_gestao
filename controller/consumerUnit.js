@@ -1,6 +1,16 @@
 const User = require('../model/User');
 const Dealership = require('../model/Dealership');
 const ConsumerUnit = require('../model/ConsumerUnit');
+const Contract = require('../model/Contract');
+const Analyze = require('../model/Analyze');
+const Scenario = require('../model/Scenario');
+const Infrastructure = require('../model/Infrastructure');
+const Consum = require('../model/Consum');
+const Demand = require('../model/Demand');
+const Bill = require('../model/Bill');
+const Category = require('../model/Category');
+const Tariff = require('../model/Tariff');
+const Period = require('../model/Period');
 
 
 module.exports.add = async (req, res) => {
@@ -87,6 +97,59 @@ module.exports.changeStatus = async (req, res) => {
             }
         })
     return res.status(200).json({numberOfAffectedRows, affectedRows})
+}
+
+module.exports.getByStatus = async (req, res) => {
+      
+    const {
+        idConsumerUnit,
+    } = req.params;
+
+    try {
+        const { idConsumerUnit } = req.params;
+       
+        const consumer = await ConsumerUnit.findOne({
+            where: {idConsumerUnit: idConsumerUnit},
+            include: [
+                {
+                    model: User
+                }, {
+                    model: Contract, 
+                    include: [{
+                        model: Analyze,
+                        include: [{
+                            model: Scenario, as: 'scenarios',
+                            include: [{
+                                model: Tariff,
+                                include: [{
+                                    model: Category,
+                                }]
+                            }, {
+                                model:Consum,
+                                include: [{
+                                    model: Period,
+                                }]
+                            }, Demand]
+                        }] 
+                    },{
+                        model: Bill
+                    },{
+                        model: Dealership
+                    },{
+                        model: Category
+                    }]
+                },
+                {model: Infrastructure}
+            ],
+            
+    }).then(parent => {
+        return res.status(200).json(parent);
+    })
+    
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
 }
 
 module.exports.JoinConsumerAndUser = async (req, res) => {

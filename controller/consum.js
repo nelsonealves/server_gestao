@@ -1,5 +1,6 @@
 const Scenario = require('../model/Scenario');
 const Consum = require('../model/Consum');
+const Period = require('../model/Period');
 
 module.exports.addMany = async (req, res) => {
     const {
@@ -72,6 +73,7 @@ module.exports.getByScenario = async (req, res) => {
         const consums = await Consum.findAll(
             {
                 where:{idScenario: idScenario},
+                include: [Period]
                 
             }
         );

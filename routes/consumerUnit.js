@@ -16,6 +16,10 @@ module.exports = (express) => {
         express.controller.consumerUnit.getAllAndJoinConsumerWithUser(req, res);
     });
 
+    express.get('/consumerUnit/:idConsumerUnit/status', (req, res) => {
+        express.controller.consumerUnit.getByStatus(req, res);
+    });
+
     express.get('/consumerUnit/:idConsumerUnit/user', (req, res) => {
         express.controller.consumerUnit.JoinConsumerAndUser(req, res);
     });
