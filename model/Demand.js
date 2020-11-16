@@ -3,10 +3,16 @@ const { Model, DataTypes } = require('sequelize');
 class Demand extends Model {
   static init(sequelize) {
     super.init({
+      idDemand: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
       measured: DataTypes.JSON,
       contracted: DataTypes.JSON,
       optimized: DataTypes.JSON,
-      datasets: DataTypes.JSON,
+      valueTotal: DataTypes.FLOAT,
+      //datasets: DataTypes.JSON,
       status: DataTypes.INTEGER
     }, {
       sequelize,

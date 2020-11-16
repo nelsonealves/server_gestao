@@ -3,10 +3,6 @@ const { Model, DataTypes } = require('sequelize');
 class Conventional extends Model {
   static init(sequelize) {
     super.init({
-        idTariff: {
-          type: DataTypes.INTEGER,
-          primaryKey: true
-        },
         te: DataTypes.FLOAT,
         tusd: DataTypes.FLOAT,
     }, {

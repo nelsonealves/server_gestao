@@ -12,6 +12,10 @@ module.exports = (express) => {
         express.controller.green.getDealershipCategory(req, res);
     });
 
+    express.get('/green/:idTariff', (req, res) => {
+        express.controller.green.getByIdTariff(req, res);
+    });
+
     express.get('/green/all', (req, res) => {
         express.controller.green.get_all(req, res);
     });

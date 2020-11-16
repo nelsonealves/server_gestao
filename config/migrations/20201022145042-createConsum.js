@@ -3,6 +3,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.createTable('Consum', {
+      idConsum: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+     },
       idScenario:{
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -26,7 +31,12 @@ module.exports = {
       
       measured: {
         type: Sequelize.JSON,
-        allowNull: true,
+        allowNull: false,
+      },
+
+      valueTotal: {
+        type: Sequelize.JSON,
+        allowNull: false,
       },
       
 

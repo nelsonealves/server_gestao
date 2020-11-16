@@ -3,10 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class White extends Model {
   static init(sequelize) {
     super.init({
-        idTariff: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-        },
+
         tePonta: DataTypes.FLOAT,
         tusdPonta: DataTypes.FLOAT,
         teIntermed: DataTypes.FLOAT,

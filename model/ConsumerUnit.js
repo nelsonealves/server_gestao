@@ -21,7 +21,6 @@ class ConsumerUnit extends Model {
     this.belongsTo(models.User, {foreignKey: 'idUser'});
     this.hasOne(models.Infrastructure, {foreignKey: 'idConsumerUnit'});
     this.hasMany(models.Contract, {foreignKey: 'idConsumerUnit'});
-    //this.hasMany(models.User, {foreignKey: 'idDealership'});
   }
 }
 

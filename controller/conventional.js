@@ -33,3 +33,30 @@ module.exports.getDealershipCategory = async (req, res) => {
         return res.status(500).json(err);
     }
 }
+
+
+module.exports.getByIdTariff = async (req, res) => {
+    try {
+        const {
+            idTariff
+        } = req.params;
+        
+        
+        /* Return error if contract doesnt exist */
+        const tariff = await Tariff.findByPk(idTariff);
+
+        if (!tariff) {
+            console.log('errou')
+            return res.status(400).json({ error: 'NOT_FOUND' });
+        }
+
+        const conventional = await Conventional.findOne({
+            where: {idTariff: idTariff},
+        });
+
+        return res.status(200).json(conventional);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}

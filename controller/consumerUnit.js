@@ -12,6 +12,11 @@ const Category = require('../model/Category');
 const Tariff = require('../model/Tariff');
 const Period = require('../model/Period');
 
+const Conventional = require('../model/Conventional');
+const White = require('../model/White');
+const Green = require('../model/Green');
+const Blue = require('../model/Blue');
+
 
 module.exports.add = async (req, res) => {
     const {
@@ -123,13 +128,14 @@ module.exports.getByStatus = async (req, res) => {
                                 model: Tariff,
                                 include: [{
                                     model: Category,
-                                }]
+                                }
+                            ]
                             }, {
-                                model:Consum,
+                                model:Consum, as: 'Consums',
                                 include: [{
                                     model: Period,
                                 }]
-                            }, Demand]
+                            }, {model: Demand, as: 'Demands'}]
                         }] 
                     },{
                         model: Bill

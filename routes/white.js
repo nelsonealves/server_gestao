@@ -1,11 +1,15 @@
 module.exports = (express) => {
-  
+
     express.post('/white', (req, res) => {
         express.controller.white.add(req, res);
     });
 
     express.post('/white/many', (req, res) => {
         express.controller.white.add_many(req, res);
+    });
+
+    express.get('/white/:idTariff', (req, res) => {
+        express.controller.white.getByIdTariff(req, res);
     });
 
     express.get('/white/dealership/:idDealership/category/:idCategory', (req, res) => {

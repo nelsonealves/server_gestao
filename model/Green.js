@@ -3,11 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class Green extends Model {
   static init(sequelize) {
     super.init({
-        idGreen: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true
-        },
+        
         tePonta: DataTypes.FLOAT,
         tusdPonta: DataTypes.FLOAT,
         demandaUnica: DataTypes.FLOAT,

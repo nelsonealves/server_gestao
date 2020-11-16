@@ -52,6 +52,10 @@ Demand.init(connection);
 
 Consum.removeAttribute('id')
 Demand.removeAttribute('id')
+Conventional.removeAttribute('id')
+White.removeAttribute('id')
+Green.removeAttribute('id')
+Blue.removeAttribute('id')
 
 
 

@@ -3,7 +3,12 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.createTable('Demand', {
-      idScenario:{
+      idDemand: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      idScenario: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
@@ -13,7 +18,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      idPeriod:{
+      idPeriod: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
@@ -23,7 +28,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      
+      valueTotal: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
       measured: {
         type: Sequelize.JSON,
         allowNull: false,
@@ -36,10 +44,10 @@ module.exports = {
         type: Sequelize.JSON,
         allowNull: true,
       },
-      datasets: {
-        type: Sequelize.JSON,
-        allowNull: false,
-      },
+      // datasets: {
+      //   type: Sequelize.JSON,
+      //   allowNull: false,
+      // },
       status: {
         type: Sequelize.INTEGER,
         allowNull: false,
