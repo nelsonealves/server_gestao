@@ -16,6 +16,8 @@ const Conventional = require('../model/Conventional');
 const White = require('../model/White');
 const Green = require('../model/Green');
 const Blue = require('../model/Blue');
+const Diesel = require('../model/Diesel');
+const Substation = require('../model/Substation');
 
 
 module.exports.add = async (req, res) => {
@@ -71,11 +73,11 @@ module.exports.getAll = async (req, res) => {
 module.exports.getAllAndJoinConsumerWithUser = async (req, res) => {
     try {
         const consumerUnit = await ConsumerUnit.findAll({
-            include: [{model: User}]
+            include: [{ model: User }]
         }).then(parent => {
             return res.status(200).json(parent);
         })
-    
+
     } catch (err) {
         console.log(err);
         return res.status(500).json(err);
@@ -83,7 +85,7 @@ module.exports.getAllAndJoinConsumerWithUser = async (req, res) => {
 }
 
 module.exports.changeStatus = async (req, res) => {
-    
+
     const {
         idConsumerUnit,
         status
@@ -96,62 +98,65 @@ module.exports.changeStatus = async (req, res) => {
     const [numberOfAffectedRows, affectedRows] = await ConsumerUnit.update(
         {
             status: status
-        },{
-            where : {
-                idConsumerUnit: idConsumerUnit
-            }
-        })
-    return res.status(200).json({numberOfAffectedRows, affectedRows})
+        }, {
+        where: {
+            idConsumerUnit: idConsumerUnit
+        }
+    })
+    return res.status(200).json({ numberOfAffectedRows, affectedRows })
 }
 
 module.exports.getByStatus = async (req, res) => {
-      
+
     const {
         idConsumerUnit,
     } = req.params;
 
     try {
         const { idConsumerUnit } = req.params;
-       
+
         const consumer = await ConsumerUnit.findOne({
-            where: {idConsumerUnit: idConsumerUnit},
+            where: { idConsumerUnit: idConsumerUnit },
             include: [
                 {
                     model: User
                 }, {
-                    model: Contract, 
+                    model: Contract,
                     include: [{
                         model: Analyze,
-                        include: [{
-                            model: Scenario, as: 'scenarios',
-                            include: [{
-                                model: Tariff,
+                        include: [
+                            Diesel,
+                            Substation,
+                            {
+                                model: Scenario, as: 'scenarios',
                                 include: [{
-                                    model: Category,
-                                }
-                            ]
-                            }, {
-                                model:Consum, as: 'Consums',
-                                include: [{
-                                    model: Period,
-                                }]
-                            }, {model: Demand, as: 'Demands'}]
-                        }] 
-                    },{
+                                    model: Tariff,
+                                    include: [{
+                                        model: Category,
+                                    }
+                                    ]
+                                }, {
+                                    model: Consum, as: 'Consums',
+                                    include: [{
+                                        model: Period,
+                                    }]
+                                }, { model: Demand, as: 'Demands' }]
+                            }]
+                    }, {
                         model: Bill
-                    },{
+                    }, {
                         model: Dealership
-                    },{
+                    }, {
                         model: Category
                     }]
                 },
-                {model: Infrastructure}
+                { model: Infrastructure }
             ],
-            
-    }).then(parent => {
-        return res.status(200).json(parent);
-    })
-    
+
+        }).then(parent => {
+            return res.status(200).json(parent);
+        })
+
     } catch (err) {
         console.log(err);
         return res.status(500).json(err);
@@ -161,18 +166,18 @@ module.exports.getByStatus = async (req, res) => {
 module.exports.JoinConsumerAndUser = async (req, res) => {
     try {
         const { idConsumerUnit } = req.params;
-       
+
         const consumer = await ConsumerUnit.findOne({
-            where: {idConsumerUnit: idConsumerUnit},
-            include: [{model: User}],
-            
-    }).then(parent => {
-        return res.status(200).json(parent);
-    })
-    
+            where: { idConsumerUnit: idConsumerUnit },
+            include: [{ model: User }],
+
+        }).then(parent => {
+            return res.status(200).json(parent);
+        })
+
     } catch (err) {
         console.log(err);
         return res.status(500).json(err);
     }
-    
+
 }

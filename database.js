@@ -21,11 +21,9 @@ const State = require('./model/State.js'),
     Tariff = require('./model/Tariff'),
     Period = require('./model/Period'),
     Consum = require('./model/Consum'),
-    Demand = require('./model/Demand');
-    
-
-
-
+    Demand = require('./model/Demand'),
+    Diesel = require('./model/Diesel'),
+    Substation = require('./model/Substation');
 
 const connection = new Sequelize(dbConfig);
 
@@ -49,6 +47,8 @@ Blue.init(connection);
 Period.init(connection);
 Consum.init(connection);
 Demand.init(connection);
+Diesel.init(connection);
+Substation.init(connection);
 
 Consum.removeAttribute('id')
 Demand.removeAttribute('id')
@@ -81,6 +81,8 @@ Blue.associate(connection.models);
 Period.associate(connection.models);
 Consum.associate(connection.models);
 Demand.associate(connection.models);
+Substation.associate(connection.models);
+Diesel.associate(connection.models);
 
 
 module.exports = connection;
