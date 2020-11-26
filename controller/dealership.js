@@ -1,6 +1,12 @@
 const State = require('../model/State');
 const Dealership = require('../model/Dealership');
 const Category = require('../model/Category');
+const Tribute = require('../model/Tribute');
+const Tariff = require('../model/Tariff');
+const Blue = require('../model/Blue');
+const Green = require('../model/Green');
+const White = require('../model/White');
+const Conventional = require('../model/Conventional');
 
 module.exports.add = async (req, res) => {
     const { 
@@ -50,6 +56,69 @@ module.exports.getById = async (req, res) => {
   
     try {
         const dealership = await Dealership.findByPk(idDealership);
+    
+        /* Returns error if dealership doesnt exist */
+        if (!dealership) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        
+        return res.status(200).json(dealership);
+    
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+module.exports.getTributes = async (req, res) => {
+    const { 
+        idDealership
+    } = req.params;
+  
+    try {
+        const dealership = await Dealership.findOne(
+            { 
+                where: {idDealership: idDealership},
+                include: {
+                    model: Tribute,
+                    attributes: ['cofins', 'pis', 'date']
+                }
+        });
+    
+        /* Returns error if dealership doesnt exist */
+        if (!dealership) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        
+        return res.status(200).json(dealership);
+    
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+
+module.exports.getTributesAndTariff = async (req, res) => {
+    const { 
+        idDealership
+    } = req.params;
+  
+    try {
+        const dealership = await Dealership.findOne(
+            { 
+                where: {idDealership: idDealership},
+                include: [{
+                    model: Tribute,
+                    attributes: ['cofins', 'pis', 'date']
+                },{
+                    model: Tariff,
+                    include: [
+                        {model: Blue, as: 'blue'},
+                        {model: Green, as: 'green'},
+                        {model: White, as: 'white'},
+                        {model: Conventional, as: 'conventional'}
+                    ]
+                }]
+        });
     
         /* Returns error if dealership doesnt exist */
         if (!dealership) {

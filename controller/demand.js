@@ -9,8 +9,6 @@ module.exports.addMany = async (req, res) => {
     try {
         
         const demands = await Demand.bulkCreate(value);
-        console.log('demands');
-        console.log(demands);
         return res.status(200).json(demands);
 
     } catch (err) {

@@ -8,8 +8,7 @@ class Tribute extends Model {
         primaryKey: true,
         autoIncrement: true
       },
-      icms1: DataTypes.FLOAT,
-      icms2: DataTypes.FLOAT,
+      cofins: DataTypes.FLOAT,
       pis: DataTypes.FLOAT,
       date: DataTypes.DATE
     }, {
@@ -18,7 +17,7 @@ class Tribute extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.State, { foreignKey: 'uf', as: 'state' });
+    this.belongsTo(models.Dealership, { foreignKey: 'idDealership'});
   }
 }
 

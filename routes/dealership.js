@@ -12,6 +12,13 @@ module.exports = (express) => {
         express.controller.dealership.getCategories(req, res);
     });
 
+    express.get('/dealership/:idDealership/tributes', (req, res) => {
+        express.controller.dealership.getTributes(req, res);
+    });
+    express.get('/dealership/:idDealership/tributes/tariff', (req, res) => {
+        express.controller.dealership.getTributesAndTariff(req, res);
+    });
+
     express.get('/dealerships', (req, res) => {
         express.controller.dealership.getAll(req, res);
     });

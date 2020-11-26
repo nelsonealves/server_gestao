@@ -14,20 +14,20 @@ module.exports = {
          type: Sequelize.DATE,
          allowNull: false
        },
-       icms1: {
+       cofins: {
          type: Sequelize.FLOAT,
          allowNull: false
        },
-       icms2: {
+       pis: {
          type: Sequelize.FLOAT,
          allowNull: false
        },
-       uf: {
-         type: Sequelize.STRING(2),
+       idDealership: {
+         type: Sequelize.INTEGER,
          allowNull: false,
          references: {
-           model: 'States',
-           key: 'uf'
+           model: 'Dealership',
+           key: 'idDealership'
          },
          onUpdate: 'CASCADE',
          onDelete: 'CASCADE'

@@ -9,8 +9,8 @@ module.exports = {
       }])
 
       await queryInterface.bulkInsert('Conventional', [{
-        te: 1,
-        tusd: 1,
+        te: 0.44,
+        tusd: 0.10,
         idTariff: tariff
       }]);
       await transaction.commit();

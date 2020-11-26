@@ -16,12 +16,12 @@ module.exports = {
       
       
       await queryInterface.bulkInsert('Blue', [{
-        demandaPonta: 0.1,
-        demandaForaPonta: 0.5,
-        tePonta: 1,
-        tusdPonta: 1,
-        teForaPonta: 0.5,
-        tusdForaPonta: 0.6,
+        demandaPonta: 45.72,
+        demandaForaPonta: 21.93,
+        tePonta: 0.40,
+        tusdPonta: 0.09,
+        teForaPonta: 0.30,
+        tusdForaPonta: 0.34,
         idTariff: tariff1
       },{
         demandaPonta: 0.2,

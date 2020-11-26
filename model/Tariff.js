@@ -18,10 +18,10 @@ class Tariff extends Model {
     static associate(models) {
         this.belongsTo(models.Category, { foreignKey: 'idCategory' });
         this.belongsTo(models.CategoryDealership, { foreignKey: 'idDealership' });
-        // this.hasMany(models.Conventional, { as: 'conventional', foreignKey: 'idTariff' });
-        // this.hasMany(models.White, { as: 'white', foreignKey: 'idTariff' });
-        // this.hasMany(models.Green, { as: 'green', foreignKey: 'idTariff' });
-        // this.hasMany(models.Blue, { as: 'blue', foreignKey: 'idTariff' });
+        this.hasMany(models.Conventional, { as: 'conventional', foreignKey: 'idTariff' });
+        this.hasMany(models.White, { as: 'white', foreignKey: 'idTariff' });
+        this.hasMany(models.Green, { as: 'green', foreignKey: 'idTariff' });
+        this.hasMany(models.Blue, { as: 'blue', foreignKey: 'idTariff' });
     }
 }
 

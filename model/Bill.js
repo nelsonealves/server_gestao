@@ -12,7 +12,7 @@ class Bill extends Model {
                 type: DataTypes.JSON,
                 allowNull: false
             },
-            
+            cofins: DataTypes.JSON,
         }, {
             sequelize,
             tableName: 'Bill',

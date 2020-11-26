@@ -13,11 +13,11 @@ module.exports = {
 
     await queryInterface.bulkInsert('White', [{
       tePonta: 1,
-      tusdPonta: 1,
-      teIntermed: 0.4,
-      tusdIntermed: 0.6,
-      teForaPonta: 0.5,
-      tusdForaPonta: 0.6,
+      tusdPonta: 0.8,
+      teIntermed: 0.6,
+      tusdIntermed: 0.1,
+      teForaPonta: 0.4,
+      tusdForaPonta: 0.07,
       idTariff: tariff
     }]);
     await transaction.commit();

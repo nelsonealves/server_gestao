@@ -13,11 +13,11 @@ module.exports = {
         date: new Date()
       }])
     await queryInterface.bulkInsert('Green', [{
-      tePonta: 1,
-      tusdPonta: 1,
-      demandaUnica: 0.8,
-      teForaPonta: 0.5,
-      tusdForaPonta: 0.6,
+      tePonta: 1.60,
+      tusdPonta: 0.01,
+      demandaUnica: 21.93,
+      teForaPonta: 0.30,
+      tusdForaPonta: 0.04,
       idTariff: tariff1
     },{
       tePonta: 0.9,

@@ -11,7 +11,8 @@ class Demand extends Model {
       measured: DataTypes.JSON,
       contracted: DataTypes.JSON,
       optimized: DataTypes.JSON,
-      valueTotal: DataTypes.FLOAT,
+      valueOptimization: DataTypes.FLOAT,
+      valueContracted: DataTypes.FLOAT,
       //datasets: DataTypes.JSON,
       status: DataTypes.INTEGER
     }, {

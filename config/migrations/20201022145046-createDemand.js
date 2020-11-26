@@ -28,9 +28,13 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      valueTotal: {
+      valueOptimization: {
         type: Sequelize.FLOAT,
         allowNull: false,
+      },
+      valueContracted: {
+        type: Sequelize.FLOAT,
+        allowNull: true,
       },
       measured: {
         type: Sequelize.JSON,
