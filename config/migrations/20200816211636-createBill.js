@@ -14,10 +14,6 @@ module.exports = {
         type: Sequelize.JSON,
         allowNull: false
       },
-      icms: {
-        type: Sequelize.JSON,
-        allowNull: false
-      },
       idContract:{
         type: Sequelize.INTEGER,
         allowNull: false,

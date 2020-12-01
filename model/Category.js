@@ -18,7 +18,7 @@ class Category extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Dealership, {foreignKey: 'idCategory', through: 'CategoryDealership'});
+    
   }
 }
 

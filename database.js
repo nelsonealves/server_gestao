@@ -7,7 +7,6 @@ const State = require('./model/State.js'),
     Category = require('./model/Category.js'),
     ConsumerUnit = require('./model/ConsumerUnit.js'),
     Tribute = require('./model/Tribute.js'),
-    CategoryDealership = require('./model/CategoryDealership'),
     Contract = require('./model/Contract'),
     User = require('./model/User.js'),
     Bill = require('./model/Bill.js'),
@@ -34,7 +33,6 @@ User.init(connection);
 ConsumerUnit.init(connection);
 Category.init(connection);
 Contract.init(connection);
-CategoryDealership.init(connection);
 Bill.init(connection);
 Tariff.init(connection);
 Infrastructure.init(connection);
@@ -66,7 +64,6 @@ Dealership.associate(connection.models);
 User.associate(connection.models);
 Category.associate(connection.models);
 ConsumerUnit.associate(connection.models);
-CategoryDealership.associate(connection.models);
 Contract.associate(connection.models);
 Bill.associate(connection.models);
 Tariff.associate(connection.models);

@@ -8,25 +8,33 @@ const Bill = require('../model/Bill');
 const Analyze = require('../model/Analyze');
 const Scenario = require('../model/Scenario');
 const Tariff = require('../model/Tariff');
+
 module.exports.add = async (req, res) => {
     const {
         startDate,
         capDisju,
         phases,
-        capTransf
+        capTransf,
+        icms
     } = req.body;
 
     const {
         idConsumerUnit,
         idDealership,
         idCategory } = req.params;
-    console.log(`idDealership ${idDealership}, idCategory ${idCategory}, idConsumer ${idConsumerUnit}, startDate ${startDate}`);
+
     try {
         const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
-        const dealership = await Dealership.findByPk(idDealership);
+        const tariff = await Tariff.findOne({
+            where: {
+                idCategory,
+                idDealership
+            },
+        });
+        const dealership = await Tariff.findOne(idDealership);
         const category = await Category.findByPk(idCategory);
 
-        if (!consumerUnit || !dealership || !category) {
+        if (!consumerUnit || !tariff) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
 
@@ -39,9 +47,9 @@ module.exports.add = async (req, res) => {
 
         const contract = await Contract.create({
             idConsumerUnit,
-            idDealership,
-            idCategory,
-            startDate: startDate
+            idTariff: tariff.idTariff,
+            icms,
+            startDate
         })
         console.log("ConsumerUnit");
         console.log(consumerUnit);
@@ -62,7 +70,7 @@ module.exports.add = async (req, res) => {
 module.exports.addAndChangeStatus = async (req, res) => {
     const {
         startDate,
-
+        icms
     } = req.body;
 
     const {
@@ -70,22 +78,26 @@ module.exports.addAndChangeStatus = async (req, res) => {
         idDealership,
         idCategory,
         status } = req.params;
-    console.log(`idDealership ${idDealership}, idCategory ${idCategory}, idConsumer ${idConsumerUnit}, startDate ${startDate}`);
+
     try {
         const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
-        const dealership = await Dealership.findByPk(idDealership);
-        const category = await Category.findByPk(idCategory);
+        const tariff = await Tariff.findOne({
+            where: {
+                idCategory,
+                idDealership
+            },
+        });
 
-        if (!consumerUnit || !dealership || !category) {
+        if (!consumerUnit || !tariff) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
 
 
         const contract = await Contract.create({
             idConsumerUnit,
-            idDealership,
-            idCategory,
-            startDate: startDate
+            idTariff: tariff.idTariff,
+            icms,
+            startDate
         })
 
 
@@ -99,7 +111,7 @@ module.exports.addAndChangeStatus = async (req, res) => {
         })
 
         const contractJoin = await Contract.findByPk(contract.idContract, {
-            include: [ConsumerUnit, Category, Dealership]
+            include: [ConsumerUnit, {model: Tariff, include: [{model: Dealership}, {model:Category}]}]
         })
 
 
@@ -141,7 +153,7 @@ module.exports.getByConsumerUnit = async (req, res) => {
         }
         const contracts = await Contract.findAll({
             where: { idConsumerUnit: idConsumerUnit },
-            include: [ConsumerUnit, Category, Dealership]
+            include: [ConsumerUnit, Tariff]
 
 
         });
@@ -166,7 +178,7 @@ module.exports.getByConsumerUnitAndBills = async (req, res) => {
         }
         const contracts = await Contract.findAll({
             where: { idConsumerUnit: idConsumerUnit },
-            include: [ConsumerUnit, Category, Dealership, Bill]
+            include: [ConsumerUnit, Tariff, Bill]
 
         });
         return res.status(200).json(contracts);
@@ -190,7 +202,7 @@ module.exports.getAnalyzes = async (req, res) => {
         }
         const contracts = await Contract.findAll({
             where: { idConsumerUnit: idConsumerUnit },
-            include: [{ model: Analyze}]
+            include: [{ model: Analyze }]
 
         });
         return res.status(200).json(contracts);

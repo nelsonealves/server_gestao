@@ -9,6 +9,7 @@ class Contract extends Model {
           autoIncrement: true
         },
         startDate: DataTypes.DATE ,
+        icms: DataTypes.FLOAT ,
     }, {
       sequelize,
       tableName: 'Contract',
@@ -16,8 +17,7 @@ class Contract extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Dealership, {foreignKey: 'idDealership'});
-    this.belongsTo(models.Category, {foreignKey: 'idCategory'});
+    this.belongsTo(models.Tariff, {foreignKey: 'idTariff'});
     this.belongsTo(models.ConsumerUnit, {foreignKey: 'idConsumerUnit'});
     this.hasMany(models.Bill, {foreignKey: 'idContract'});
     this.hasMany(models.Analyze, {foreignKey: 'idAnalyzes'});

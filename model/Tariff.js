@@ -17,7 +17,7 @@ class Tariff extends Model {
 
     static associate(models) {
         this.belongsTo(models.Category, { foreignKey: 'idCategory' });
-        this.belongsTo(models.CategoryDealership, { foreignKey: 'idDealership' });
+        this.belongsTo(models.Dealership, { foreignKey: 'idDealership' });
         this.hasMany(models.Conventional, { as: 'conventional', foreignKey: 'idTariff' });
         this.hasMany(models.White, { as: 'white', foreignKey: 'idTariff' });
         this.hasMany(models.Green, { as: 'green', foreignKey: 'idTariff' });

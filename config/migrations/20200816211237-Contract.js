@@ -10,22 +10,12 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       }, 
-      idCategory:{
+      idTariff:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'CategoryDealership',
-          key: 'idCategory'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      idDealership:{
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'CategoryDealership',
-          key: 'idDealership'
+          model: 'Tariff',
+          key: 'idTariff'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
@@ -39,6 +29,10 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      },
+      icms: {
+        type: Sequelize.FLOAT,
+        allowNull: false
       },
       startDate: {
         type: Sequelize.DATE,

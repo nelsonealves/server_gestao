@@ -145,9 +145,11 @@ module.exports.getByStatus = async (req, res) => {
                     }, {
                         model: Bill
                     }, {
-                        model: Dealership
-                    }, {
-                        model: Category
+                        model: Tariff,
+                        include: [
+                            {model: Dealership},
+                            {model: Category}
+                        ]
                     }]
                 },
                 { model: Infrastructure }

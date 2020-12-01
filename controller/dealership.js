@@ -153,12 +153,15 @@ module.exports.getCategories = async (req, res) => {
     try {
         const { idDealership } = req.params;
        
-        const categories = await Dealership.findOne({
+        const categories = await Tariff.findAll({
             where: {idDealership: idDealership},
             include: [{model: Category}],
             
     }).then(parent => {
-        return res.status(200).json(parent);
+        let category = parent.map(res => {
+            return res.Category;
+        })
+        return res.status(200).json(category);
     })
     
     } catch (err) {

@@ -5,7 +5,6 @@ module.exports.add = async (req, res) => {
     const {
         measures,
         date,
-        icms
     } = req.body;
 
     
@@ -24,7 +23,6 @@ module.exports.add = async (req, res) => {
         const bill = await Bill.create({
             measures,
             date,
-            icms,
             idContract,
         })
 
