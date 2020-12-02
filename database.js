@@ -27,8 +27,8 @@ const State = require('./model/State.js'),
 const connection = new Sequelize(dbConfig);
 
 State.init(connection);
-Tribute.init(connection);
 Dealership.init(connection);
+Tribute.init(connection);
 User.init(connection);
 ConsumerUnit.init(connection);
 Category.init(connection);
@@ -59,8 +59,8 @@ Blue.removeAttribute('id')
 
 
 State.associate(connection.models);
-Tribute.associate(connection.models);
 Dealership.associate(connection.models);
+Tribute.associate(connection.models);
 User.associate(connection.models);
 Category.associate(connection.models);
 ConsumerUnit.associate(connection.models);

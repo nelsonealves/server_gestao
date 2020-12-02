@@ -18,6 +18,7 @@ const Green = require('../model/Green');
 const Blue = require('../model/Blue');
 const Diesel = require('../model/Diesel');
 const Substation = require('../model/Substation');
+const Tribute = require('../model/Tribute');
 
 
 module.exports.add = async (req, res) => {
@@ -147,7 +148,14 @@ module.exports.getByStatus = async (req, res) => {
                     }, {
                         model: Tariff,
                         include: [
-                            {model: Dealership},
+                            {
+                                model: Dealership,
+                                include: [
+                                    {
+                                        model: Tribute
+                                    }
+                                ]
+                            },
                             {model: Category}
                         ]
                     }]

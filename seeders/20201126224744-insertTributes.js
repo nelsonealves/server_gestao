@@ -3,8 +3,8 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return await queryInterface.bulkInsert('Tributes', [{
-      cofins: 1.29,
-      pis: 0.28,
+      cofins: 3.5258,
+      pis: 0.7679,
       date: new Date(),
       idDealership: 1
     },{

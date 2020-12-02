@@ -14,7 +14,6 @@ class State extends Model {
   }
 
   static associate (models) {
-    this.hasMany(models.Tribute, {foreignKey: 'uf', as: 'tributes'});
     //this.hasMany(models.Dealership, {foreignKey: 'uf', as: 'dealerships'});
   }
 }
