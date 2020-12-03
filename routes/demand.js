@@ -9,7 +9,7 @@ module.exports = (express) => {
     });
     
     express.get('/demand/:idScenario/all', (req, res) => {
-        express.controller.demand.getAll(req, res);
+        express.controller.demand.getAllByScenario(req, res);
     });
 
 }

@@ -8,6 +8,10 @@ module.exports = (express) => {
         express.controller.tributes.get_by_id(req, res);
     });
 
+    express.get('/tribute/dealership/:idDealership', (req, res) => {
+        express.controller.tributes.getByIdDealership(req, res);
+    });
+
     express.get('/tributes', (req, res) => {
         express.controller.tributes.get_all(req, res);
     });
