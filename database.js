@@ -22,13 +22,15 @@ const State = require('./model/State.js'),
     Consum = require('./model/Consum'),
     Demand = require('./model/Demand'),
     Diesel = require('./model/Diesel'),
-    Substation = require('./model/Substation');
+    Substation = require('./model/Substation'),
+    Auth = require('./model/Auth');
 
 const connection = new Sequelize(dbConfig);
 
 State.init(connection);
 Dealership.init(connection);
 Tribute.init(connection);
+Auth.init(connection);
 User.init(connection);
 ConsumerUnit.init(connection);
 Category.init(connection);
@@ -58,6 +60,7 @@ Blue.removeAttribute('id')
 
 
 
+Auth.associate(connection.models);
 State.associate(connection.models);
 Dealership.associate(connection.models);
 Tribute.associate(connection.models);

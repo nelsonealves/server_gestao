@@ -32,7 +32,16 @@ module.exports = {
          type: Sequelize.STRING,
          allowNull: true
       },
-      
+      idAuth:{
+         type: Sequelize.INTEGER,
+         allowNull: false,
+         references: {
+            model: 'Auth',
+            key: 'idAuth'
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
+        }
      });
 
   },
