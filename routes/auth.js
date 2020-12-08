@@ -1,7 +1,6 @@
 module.exports = (express) => {
   
     express.post('/register', (req, res) => {
-        
         express.controller.auth.register(req, res);
     });
    
