@@ -9,6 +9,7 @@ module.exports.add = async (req, res) => {
         email, 
         tel1, 
         tel2,
+        idAuth
     } = req.body;
   
     try {
@@ -19,6 +20,7 @@ module.exports.add = async (req, res) => {
             email, 
             tel1, 
             tel2,
+            idAuth
         })
         return res.status(200).json(user);
         
