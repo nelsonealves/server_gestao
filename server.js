@@ -6,7 +6,9 @@ consign = require('consign'),
 cors = require('cors'),
 expressValidator = require('express-validator'),
 express_session = require('express-session'),
-require('./database.js');
+require('./database.js'),
+authMiddleware = require('./middlewares/auth');
+
 
 express.use(bodyParser.json());
 express.use(express_session({
@@ -18,9 +20,13 @@ express.use(express_session({
 
 express.use(cors());
 
+consign().include('auth')
+.into(express);
+
+express.use(authMiddleware)
 consign().include('routes')
 .then('controller')
-.into(express);;
+.into(express);
 
 express.listen(process.env.PORT || 8081, function(){
   console.log("Express ok!\n");

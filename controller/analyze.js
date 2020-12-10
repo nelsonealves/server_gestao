@@ -45,15 +45,15 @@ module.exports.addAndIncrementStatus = async (req, res) => {
         status
     } = req.params;
     try {
-        const contract = await Contract.findByPk(idContract);
+        const contract = await Contract.findOne({
+            where: {idContract},
+            include: [ConsumerUnit]
+
+        });
         const tariff = await Tariff.findAll({
             where: { idDealership, idCategory },
         });
-        console.log('contract');
-        console.log(contract.idContract);
-        console.log('tariff');
-        console.log(date);
-
+  
         if (!contract || !tariff[0].idTariff) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
@@ -74,14 +74,18 @@ module.exports.addAndIncrementStatus = async (req, res) => {
         analyzeCreate.idScenario = scenario.idScenario;
         await analyzeCreate.save();
 
+        console.log('contract')
+        console.log(contract)
 
-        // const analyzeResult = await Analyze.findAll({
-        //     attributes: ['idAnalyzes', 'idContract', 'date', 'idScenario'],
-        //     where: {
-        //         idAnalyzes: analyzeCreate.idAnalyzes
-        //     }
-        // });
-
+        await ConsumerUnit.update(
+            {
+                status: status
+            }, {
+            where: {
+                idConsumerUnit: contract.ConsumerUnit.idConsumerUnit
+            }
+        })
+        
 
         return res.status(200).json(analyzeCreate);
 

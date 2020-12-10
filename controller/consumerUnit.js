@@ -72,6 +72,8 @@ module.exports.getAll = async (req, res) => {
 }
 
 module.exports.getAllAndJoinConsumerWithUser = async (req, res) => {
+    console.log('req.idAuth');
+    console.log(req.idAuth);
     try {
         const consumerUnit = await ConsumerUnit.findAll({
             include: [{ model: User }]
@@ -163,9 +165,10 @@ module.exports.getByStatus = async (req, res) => {
                 { model: Infrastructure }
             ],
 
-        }).then(parent => {
-            return res.status(200).json(parent);
         })
+        
+        return res.status(200).json(consumer);
+        
 
     } catch (err) {
         console.log(err);

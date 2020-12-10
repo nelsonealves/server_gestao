@@ -11,6 +11,7 @@ class Infrastructure extends Model {
         capDisju: DataTypes.INTEGER,
         phases: DataTypes.INTEGER,
         capTransf: DataTypes.INTEGER,
+        voltage: DataTypes.INTEGER
     }, {
       sequelize,
       tableName: 'Infrastructure',

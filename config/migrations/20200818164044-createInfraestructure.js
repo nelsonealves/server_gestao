@@ -9,6 +9,10 @@ module.exports = {
          primaryKey: true,
          autoIncrement: true
       },
+      voltage: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       phases: {
         type: Sequelize.INTEGER,
         allowNull: true,

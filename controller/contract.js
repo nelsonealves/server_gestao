@@ -111,7 +111,73 @@ module.exports.addAndChangeStatus = async (req, res) => {
         })
 
         const contractJoin = await Contract.findByPk(contract.idContract, {
-            include: [ConsumerUnit, {model: Tariff, include: [{model: Dealership}, {model:Category}]}]
+            include: [ConsumerUnit, { model: Tariff, include: [{ model: Dealership }, { model: Category }] }]
+        })
+
+
+        return res.status(200).json(contractJoin);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+module.exports.addAndChangeStatusAndInfra = async (req, res) => {
+    const {
+        startDate,
+        icms,
+        capDisju,
+        phases,
+        capTransf,
+        voltage
+    } = req.body;
+
+    const {
+        idConsumerUnit,
+        idDealership,
+        idCategory,
+        status } = req.params;
+
+    try {
+        const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
+        const tariff = await Tariff.findOne({
+            where: {
+                idCategory,
+                idDealership
+            },
+        });
+
+        if (!consumerUnit || !tariff) {
+            return res.status(400).json({ error: 'NOT_FOUND' });
+        }
+
+
+        const contract = await Contract.create({
+            idConsumerUnit,
+            idTariff: tariff.idTariff,
+            icms,
+            startDate
+        })
+
+        await Infrastructure.create({
+            idConsumerUnit,
+            capDisju,
+            phases,
+            capTransf,
+            voltage
+        })
+
+        await ConsumerUnit.update(
+            {
+                status: status
+            }, {
+            where: {
+                idConsumerUnit: idConsumerUnit
+            }
+        })
+
+        const contractJoin = await Contract.findByPk(contract.idContract, {
+            include: [{ model: ConsumerUnit, include: [Infrastructure] }, { model: Tariff, include: [{ model: Dealership }, { model: Category }] }]
         })
 
 
@@ -202,7 +268,7 @@ module.exports.getAnalyzes = async (req, res) => {
         }
         const contracts = await Contract.findAll({
             where: { idConsumerUnit: idConsumerUnit },
-            include: [{ model: Analyze }]
+            include: [{ model: Analyze, as: 'analyze'}]
 
         });
         return res.status(200).json(contracts);

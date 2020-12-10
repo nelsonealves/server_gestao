@@ -20,7 +20,7 @@ class Contract extends Model {
     this.belongsTo(models.Tariff, {foreignKey: 'idTariff'});
     this.belongsTo(models.ConsumerUnit, {foreignKey: 'idConsumerUnit'});
     this.hasMany(models.Bill, {foreignKey: 'idContract'});
-    this.hasMany(models.Analyze, {foreignKey: 'idAnalyzes'});
+    this.hasMany(models.Analyze, {foreignKey: 'idContract'});
   }
 }
 

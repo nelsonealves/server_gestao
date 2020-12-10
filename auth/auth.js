@@ -4,21 +4,21 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const enviroments = require('../config/environments');
 
-module.exports.register = async (req, res) => {
+express.post('/register', async (req, res) => {
     const {
         firstName,
         lastName,
         email,
         password
     } = req.body;
-    
+
     try {
         const auth = await Auth.findOne({
             where: {
-                email                
+                email
             }
         });
-        
+
         if (auth) {
             return res.status(401).json({ error: 'EMAIL_ALREADY_EXISTS' });
         }
@@ -36,41 +36,39 @@ module.exports.register = async (req, res) => {
     } catch (err) {
         return res.status(500).json(err);
     }
+});
 
-
-}
-
-module.exports.authenticate = async (req, res) => {
+express.post('/authenticate', async (req, res) => {
     const {
         email,
         password
     } = req.body;
-    
+
     try {
         const auth = await Auth.findOne({
             where: {
-                email                
+                email
             }
         });
-        
+
         if (!auth) {
             return res.status(401).json({ error: 'USR_NOT_FOUND' });
         }
-        if (!await bcrypt.compare(password, auth.password)){
+        if (!await bcrypt.compare(password, auth.password)) {
             return res.status(401).json({ error: 'INVALID_PASSWORD' });
         }
 
         auth.password = undefined;
 
-        const token = jwt.sign({id: auth.id}, enviroments.secret, {
+        const token = jwt.sign({ idAuth: auth.idAuth }, enviroments.secret, {
             expiresIn: 86400
-        } )
+        })
 
-        return res.status(200).json({auth,token});
+        return res.status(200).json({ auth, token });
 
     } catch (err) {
         return res.status(500).json(err);
     }
 
+});
 
-}

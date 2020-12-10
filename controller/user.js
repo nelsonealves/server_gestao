@@ -9,9 +9,8 @@ module.exports.add = async (req, res) => {
         email, 
         tel1, 
         tel2,
-        idAuth
     } = req.body;
-  
+    
     try {
         
         const user = await User.create({
@@ -20,19 +19,25 @@ module.exports.add = async (req, res) => {
             email, 
             tel1, 
             tel2,
-            idAuth
+            idAuth: req.idAuth
         })
+
+        console.log('user');
+        console.log(user);
         return res.status(200).json(user);
         
     } catch (err) {
-        return res.status(500).json(err.errors);
+        return res.status(500).json(err);
     }
 }
 
 module.exports.getAll = async (req, res) => {
-    console.log('opa');
     try {
-        const users = await User.findAll();
+        const users = await User.findAll({
+            where: {
+                idAuth: req.idAuth
+            }
+        });
     
         /* Returns error if dealership doesnt exist */
         if (!users) {
@@ -44,6 +49,32 @@ module.exports.getAll = async (req, res) => {
         return res.status(500).json(err);
     }
     
+}
+
+module.exports.getAllWithUnits = async (req, res) => {
+    try {
+        const users = await User.findAll({
+            where: {
+                idAuth: req.idAuth
+            },
+            include: [{model: ConsumerUnit, include: [User]}]
+        });
+    
+        /* Returns error if dealership doesnt exist */
+        if (!users) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        let consumerUnits = [];
+        
+        for (let user of users) {
+            await consumerUnits.push(...user.ConsumerUnits)
+        }
+        
+        return res.status(200).json(consumerUnits);
+    
+    } catch (err) {
+        return res.status(500).json(err);
+    }
 }
 
 module.exports.getDealershipInclude = async (req, res) => {

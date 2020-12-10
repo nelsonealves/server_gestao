@@ -9,7 +9,12 @@ module.exports = {
       firstName: 'Gabriel',
       lastName: "Espindola",
       email: "gabriel@email.com",
-      password: await bcrypt.hash('123456', 10)
+      password: await bcrypt.hash('gabriel', 10)
+    },{
+      firstName: 'Nelson',
+      lastName: "Espindola",
+      email: "nelson@email.com",
+      password: await bcrypt.hash('nelson', 10)
     }
   ]);
   },
