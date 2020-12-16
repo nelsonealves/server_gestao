@@ -8,6 +8,10 @@ module.exports = (express) => {
         express.controller.consum.addMany(req, res);
     });
 
+    express.post('/consum/:idScenario/all/status/:status/consumerUnit/:idConsumerUnit', (req, res) => {
+        express.controller.consum.addManyAndChangeStatus(req, res);
+    });
+
     express.get('/consum/:idScenario', (req, res) => {
         express.controller.consum.getByScenario(req, res);
     });

@@ -1,4 +1,5 @@
 const Scenario = require('../model/Scenario');
+const ConsumerUnit = require('../model/ConsumerUnit');
 const Consum = require('../model/Consum');
 const Period = require('../model/Period');
 
@@ -23,6 +24,38 @@ module.exports.addMany = async (req, res) => {
         console.log('values');
         console.log(req.body['value']);
         const consums = await Consum.bulkCreate(value);
+
+        return res.status(200).json(consums);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+
+}
+
+module.exports.addManyAndChangeStatus = async (req, res) => {
+    const {
+        value
+    } = req.body;
+
+    
+    const {
+        status,
+        idConsumerUnit
+    } = req.params;
+
+    try {
+        
+        const consums = await Consum.bulkCreate(value);
+
+        await ConsumerUnit.update(
+            {
+                status: status
+            }, {
+            where: {
+                idConsumerUnit: idConsumerUnit
+            }
+        })
 
         return res.status(200).json(consums);
 
