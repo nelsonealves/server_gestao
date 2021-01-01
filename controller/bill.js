@@ -58,11 +58,9 @@ module.exports.getByContract = async (req, res) => {
     } = req.params;
 
     try {
- 
-        
-    const category = await Contract.findOne({
-        where: {idContract: idContract},
-        include: [{model: Bill}],
+        const category = await Contract.findOne({
+            where: {idContract: idContract},
+            include: [{model: Bill}],
             
     }).then(parent => {
         return res.status(200).json(parent);
@@ -72,4 +70,27 @@ module.exports.getByContract = async (req, res) => {
         return res.status(500).json(err);
     }
 
+}
+
+module.exports.getByConsumerUnit = async (req, res) => {
+    const {
+        idConsumerUnit
+    } = req.params;
+
+    try {
+ 
+        const contracts = await Contract.findAll({
+            where: {idConsumerUnit: idConsumerUnit},
+            include: [{model: Bill}],
+                
+        })
+        
+        let bills = contracts.map(res => {return res.Bills})
+
+        return res.status(200).json(...bills);
+        
+    
+    } catch (err) {
+        return res.status(500).json(err);
+    }
 }

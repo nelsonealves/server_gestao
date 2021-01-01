@@ -8,6 +8,10 @@ module.exports = (express) => {
         express.controller.bill.getByContract(req, res);
     });
 
+    express.get('/bill/:idConsumerUnit/consumerUnit', (req, res) => {
+        express.controller.bill.getByConsumerUnit(req, res);
+    });
+
     express.get('/bills', (req, res) => {
         express.controller.bill.getAll(req, res);
     });

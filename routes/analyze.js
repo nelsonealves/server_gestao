@@ -11,6 +11,10 @@ module.exports = (express) => {
         express.controller.analyze.getByContract(req, res);
     });
 
+    express.get('/analyze/:idConsumerUnit/consumerUnit', (req, res) => {
+        express.controller.analyze.getByConsumerUnit(req, res);
+    });
+
     express.get('/analyzes', (req, res) => {
         express.controller.analyze.getAllAnalyzes(req, res);
     });

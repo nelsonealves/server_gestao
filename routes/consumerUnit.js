@@ -4,6 +4,10 @@ module.exports = (express) => {
         express.controller.consumerUnit.add(req, res);
     });
 
+    express.get('/consumerUnit/:idConsumerUnit/infrastructure/contract', (req, res) => {
+        express.controller.consumerUnit.getById(req, res);
+    });
+
     express.get('/consumerUnits', (req, res) => {
         express.controller.consumerUnit.getAll(req, res);
     });

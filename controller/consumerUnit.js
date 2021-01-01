@@ -54,6 +54,25 @@ module.exports.add = async (req, res) => {
 
 }
 
+module.exports.getById = async (req, res) => {
+    try {
+        const {
+            idConsumerUnit,
+        } = req.params;
+    
+        const consumer = await ConsumerUnit.findOne({
+            where: { idConsumerUnit: idConsumerUnit },
+            include: [Infrastructure, {model: Contract, include: [{model: Tariff, include: [Category]}]}]
+        });
+        return res.status(200).json(consumer);
+
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
+
 module.exports.getAll = async (req, res) => {
 
     try {
@@ -158,7 +177,7 @@ module.exports.getByStatus = async (req, res) => {
                                     }
                                 ]
                             },
-                            {model: Category}
+                            { model: Category }
                         ]
                     }]
                 },
@@ -166,9 +185,9 @@ module.exports.getByStatus = async (req, res) => {
             ],
 
         })
-        
+
         return res.status(200).json(consumer);
-        
+
 
     } catch (err) {
         console.log(err);

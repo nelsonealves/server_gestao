@@ -117,6 +117,31 @@ module.exports.getByContract = async (req, res) => {
     }
 }
 
+module.exports.getByConsumerUnit = async (req, res) => {
+    try {
+        const {
+            idConsumerUnit
+        } = req.params;
+
+        /* Return error if contract doesnt exist */
+       
+        const contracts = await Contract.findAll({
+            where: { idConsumerUnit: idConsumerUnit },
+            include: [Analyze]
+        });
+
+        if (!contracts) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+
+        let analyzes = contracts.map(res => {return res.Analyzes})
+        return res.status(200).json(...analyzes);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
 module.exports.getAllAnalyzes = async (req, res) => {
     try {
         const {
