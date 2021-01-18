@@ -53,7 +53,7 @@ module.exports.getByIdDealership = async (req, res) => {
 
 
 
-    return res.status(200).json(tributes[0]);
+    return res.status(200).json(tributes);
 
   } catch (err) {
     return res.status(500).json(err);

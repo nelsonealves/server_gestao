@@ -5,7 +5,8 @@ module.exports.add = async (req, res) => {
     const {
         capDisju,
         phases,
-        capTransf
+        capTransf,
+        voltage
     } = req.body;
   
 
@@ -21,6 +22,7 @@ module.exports.add = async (req, res) => {
             capDisju,
             phases,
             capTransf,
+            voltage,
             idConsumerUnit
         })
      
