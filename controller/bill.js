@@ -94,3 +94,24 @@ module.exports.getByConsumerUnit = async (req, res) => {
         return res.status(500).json(err);
     }
 }
+
+module.exports.deleteByIdBill = async (req, res) => {
+    console.log('opa')
+    const {
+        idBill
+    } = req.params;
+
+    try {
+ 
+        const bill = await Bill.destroy({
+            where: {idBill: idBill},
+        })
+        console.log(bill)
+        return res.status(200).json(bill);
+        
+    
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(err);
+    }
+}

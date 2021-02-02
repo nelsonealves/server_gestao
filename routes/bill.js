@@ -20,7 +20,7 @@ module.exports = (express) => {
         express.controller.bill.update(req, res);
     });
 
-    express.delete('/bill/:bill_id', (req, res) => {
-        express.controller.bill.delete(req, res);
+    express.delete('/bill/:idBill', (req, res) => {
+        express.controller.bill.deleteByIdBill(req, res);
     });
 }
