@@ -32,6 +32,55 @@ module.exports.add = async (req, res) => {
 
 }
 
+module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
+    const {
+        date,
+        consum,
+        demand
+    } = req.body;
+
+    const {
+        idContract,
+        idCategory,
+        idDealership,
+        status
+    } = req.params;
+    try {
+        const contract = await Contract.findOne({
+            where: {idContract},
+        });
+
+        const tariff = await Tariff.findAll({
+            where: { idDealership, idCategory },
+        });
+  
+        if (!contract || !tariff[0].idTariff) {
+            return res.status(400).json({ error: 'NOT_FOUND' });
+        }
+
+        const analyzeCreate = await Analyze.create({
+            date: new Date(),
+            idContract
+        })
+
+        const scenario = await Scenario.create({
+            idAnalyzes: parseInt(analyzeCreate.idAnalyzes),
+            idTariff: tariff[0].idTariff,
+            investiment: 0,
+            valueTotal: 0,
+            payback: 0
+        })
+
+        analyzeCreate.idScenario = scenario.idScenario;
+        await analyzeCreate.save();
+
+        return res.status(200).json(analyzeCreate);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
 module.exports.addAndIncrementStatus = async (req, res) => {
     const {
         date

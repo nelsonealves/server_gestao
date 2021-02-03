@@ -13,8 +13,6 @@ module.exports.addMany = async (req, res) => {
         idScenario
     } = req.params;
 
-    console.log('idScenario');
-    console.log(idScenario);
     try {
         const scenario = await Scenario.findByPk(idScenario);
 
