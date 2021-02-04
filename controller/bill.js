@@ -72,6 +72,35 @@ module.exports.getByContract = async (req, res) => {
 
 }
 
+module.exports.update = async (req, res) => {
+    const {
+        idBill
+    } = req.params;
+
+    const {
+        measures
+    } = req.body;
+    
+    try {
+        
+        const checkBill = await Bill.findByPk(idBill);
+        
+        if (!checkBill) return res.status(400).json({error: "OBJ_NOT_FOUND"});
+
+        const bill = await Bill.update({measures}, {
+            returning: true,
+            where: {
+                idBill
+            }
+          });
+          return res.status(200).json(bill)
+    } catch (err) {
+        return res.status(500).json(err)
+    }
+
+    
+}
+
 module.exports.getByConsumerUnit = async (req, res) => {
     const {
         idConsumerUnit

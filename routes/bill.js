@@ -16,7 +16,7 @@ module.exports = (express) => {
         express.controller.bill.getAll(req, res);
     });
 
-    express.put('/bill/:bill_id', (req, res) => {
+    express.put('/bill/:idBill', (req, res) => {
         express.controller.bill.update(req, res);
     });
 
