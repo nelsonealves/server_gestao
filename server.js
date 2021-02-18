@@ -11,6 +11,7 @@ authMiddleware = require('./middlewares/auth');
 
 
 express.use(bodyParser.json());
+express.use(bodyParser.urlencoded());
 express.use(express_session({
 	secret: 'sasdasddffds',
 	resave: false,
@@ -21,8 +22,10 @@ express.use(express_session({
 express.use(cors());
 
 consign().include('auth')
+//.include('routes') descomentar para usar medidor
 .into(express);
 
+// Comentar abaixo para usar medidor
 express.use(authMiddleware)
 consign().include('routes')
 .then('controller')

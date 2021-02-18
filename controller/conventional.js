@@ -11,23 +11,22 @@ module.exports.getDealershipCategory = async (req, res) => {
         
         
         /* Return error if contract doesnt exist */
-        const tariff = await Tariff.findAll({
+        const tariff = await Tariff.findOne({
             where: {idDealership, idCategory},
             // include: [ConsumerUnit, Category, Dealership]
               
         });
 
-        console.log('tariff');
-        console.log(tariff);
-        const conventional = await Conventional.findAll({
-            where: {idTariff: tariff[0].idTariff},
-        });
-
-        if (!conventional) {
+        if (!tariff) {
             return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
         }
+        const conv = await Conventional.findOne({
+            where: {idTariff: tariff.idTariff},
+            // include: [ConsumerUnit, Category, Dealership]
+              
+        });
 
-        return res.status(200).json(conventional[0]);
+        return res.status(200).json(conv);
 
     } catch (err) {
         return res.status(500).json(err);
