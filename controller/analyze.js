@@ -3,6 +3,8 @@ const ConsumerUnit = require('../model/ConsumerUnit');
 const Contract = require('../model/Contract');
 const Scenario = require('../model/Scenario');
 const Tariff = require('../model/Tariff');
+const Consum = require('../model/Consum');
+const Demand = require('../model/Demand');
 
 module.exports.add = async (req, res) => {
     const {
@@ -28,15 +30,14 @@ module.exports.add = async (req, res) => {
     } catch (err) {
         return res.status(500).json(err);
     }
-
-
 }
 
 module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
     const {
         date,
         consum,
-        demand
+        demand,
+        valueTotal
     } = req.body;
 
     const {
@@ -67,13 +68,21 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
             idAnalyzes: parseInt(analyzeCreate.idAnalyzes),
             idTariff: tariff[0].idTariff,
             investiment: 0,
-            valueTotal: 0,
+            valueTotal: valueTotal,
             payback: 0
         })
 
         analyzeCreate.idScenario = scenario.idScenario;
         await analyzeCreate.save();
+        console.log('consum')
+        console.log(consum)
 
+        console.log('demand')
+        console.log(demand)
+        const consumModel = await Consum.create({
+            ...consum, 
+                idScenario: scenario.idScenario
+        })
         return res.status(200).json(analyzeCreate);
 
     } catch (err) {

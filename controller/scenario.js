@@ -2,6 +2,8 @@ const Scenario = require('../model/Scenario');
 const Analyze = require('../model/Analyze');
 const Category = require('../model/Category');
 const Tariff = require('../model/Tariff');
+const Consum = require('../model/Consum');
+const Demand = require('../model/Demand');
 const { Op } = require('sequelize')
 
 module.exports.add = async (req, res) => {
@@ -19,9 +21,9 @@ module.exports.add = async (req, res) => {
     try {
         const analyze = await Analyze.findByPk(idAnalyzes);
         const tariff = await Tariff.findAll({
-            where: {idDealership, idCategory},
+            where: { idDealership, idCategory },
         });
-        
+
         if (!analyze || !tariff) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
@@ -35,7 +37,7 @@ module.exports.add = async (req, res) => {
         })
         console.log('scenario');
         console.log(scenario);
-        
+
         return res.status(200).json(scenario);
 
     } catch (err) {
@@ -45,6 +47,64 @@ module.exports.add = async (req, res) => {
 
 }
 
+module.exports.addConsumDemand = async (req, res) => {
+    const {
+        investiment,
+        valueTotal,
+        payback,
+        consum,
+        demand
+    } = req.body;
+
+    const {
+        idAnalyzes,
+        idCategory,
+        idDealership } = req.params;
+
+    try {
+        const analyze = await Analyze.findByPk(idAnalyzes);
+        const tariff = await Tariff.findAll({
+            where: { idDealership, idCategory },
+        });
+
+        if (!analyze || !tariff) {
+            return res.status(400).json({ error: 'NOT_FOUND' });
+        }
+
+        const scenario = await Scenario.create({
+            idAnalyzes: parseInt(idAnalyzes),
+            idTariff: tariff[0].idTariff,
+            investiment,
+            valueTotal,
+            payback
+        })
+        if (consum) {
+            for (let x of consum) {
+                await Consum.create({
+                    ...x,
+                    idScenario: scenario.idScenario
+                })
+            }
+        }
+
+        if (demand) {
+            for (let x of demand) {
+                await Demand.create({
+                    ...x,
+                    idScenario: scenario.idScenario,
+                    status: 0
+                })
+            }
+        }
+
+        return res.status(200).json(scenario);
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+
+}
 
 module.exports.addMany = async (req, res) => {
     const {
@@ -100,8 +160,8 @@ module.exports.getByAnalyzes = async (req, res) => {
         }
         const scenarios = await Scenario.findAll(
             {
-                where:{idAnalyzes: idAnalyzes},
-                include: [{model: Tariff, include: [{model: Category}]}]
+                where: { idAnalyzes: idAnalyzes },
+                include: [{ model: Tariff, include: [{ model: Category }] }]
             }
         );
 

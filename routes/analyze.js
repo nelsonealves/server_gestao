@@ -4,7 +4,7 @@ module.exports = (express) => {
         express.controller.analyze.add(req, res);
     });
 
-    express.post('/analyze/contract/:idContract/category/:idCategory/dealership/:idDealership', (req, res) => {
+    express.post('/analyze/contract/:idContract/category/:idCategory/dealership/:idDealership/ref', (req, res) => {
         express.controller.analyze.addAnalyzesAndScenarioRef(req, res);
     });
 
