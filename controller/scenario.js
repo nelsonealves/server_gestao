@@ -10,7 +10,9 @@ module.exports.add = async (req, res) => {
     const {
         investiment,
         valueTotal,
-        payback
+        payback,
+        substation,
+        diesel
     } = req.body;
 
 
@@ -31,12 +33,10 @@ module.exports.add = async (req, res) => {
         const scenario = await Scenario.create({
             idAnalyzes: parseInt(idAnalyzes),
             idTariff: tariff[0].idTariff,
-            investiment,
-            valueTotal,
-            payback
+            substation,
+            diesel,
+            valueTotal
         })
-        console.log('scenario');
-        console.log(scenario);
 
         return res.status(200).json(scenario);
 
@@ -49,9 +49,10 @@ module.exports.add = async (req, res) => {
 
 module.exports.addConsumDemand = async (req, res) => {
     const {
-        investiment,
         valueTotal,
         payback,
+        substation,
+        diesel,
         consum,
         demand
     } = req.body;
@@ -74,9 +75,10 @@ module.exports.addConsumDemand = async (req, res) => {
         const scenario = await Scenario.create({
             idAnalyzes: parseInt(idAnalyzes),
             idTariff: tariff[0].idTariff,
-            investiment,
             valueTotal,
-            payback
+            payback,
+            substation,
+            diesel,
         })
         if (consum) {
             for (let x of consum) {

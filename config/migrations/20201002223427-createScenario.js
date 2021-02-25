@@ -19,10 +19,13 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      
-      investiment: {
-        type: Sequelize.FLOAT,
-        allowNull: true,
+      substation: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
+      diesel: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
       },
       valueTotal: {
         type: Sequelize.FLOAT,

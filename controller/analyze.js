@@ -37,7 +37,9 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
         date,
         consum,
         demand,
-        valueTotal
+        valueTotal,
+        substation,
+        diesel
     } = req.body;
 
     const {
@@ -63,13 +65,15 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
             date: new Date(),
             idContract
         })
-
+        console.log('VALUE TOTAL')
+        console.log(valueTotal)
         const scenario = await Scenario.create({
             idAnalyzes: parseInt(analyzeCreate.idAnalyzes),
             idTariff: tariff[0].idTariff,
-            investiment: 0,
+            substation,
+            diesel,
             valueTotal: valueTotal,
-            payback: 0
+           
         })
 
         analyzeCreate.idScenario = scenario.idScenario;

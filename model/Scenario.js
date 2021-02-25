@@ -8,9 +8,9 @@ class Scenario extends Model {
                 primaryKey: true,
                 autoIncrement: true
               },
-              investiment: DataTypes.FLOAT,
               valueTotal: DataTypes.FLOAT,
-              payback: DataTypes.FLOAT,
+              diesel: DataTypes.BOOLEAN,
+              substation: DataTypes.BOOLEAN,
         }, {
             sequelize,
             tableName: 'Scenario',
