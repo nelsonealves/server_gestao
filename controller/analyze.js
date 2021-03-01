@@ -56,7 +56,8 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
         const tariff = await Tariff.findAll({
             where: { idDealership, idCategory },
         });
-  
+        
+        
         if (!contract || !tariff[0].idTariff) {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
@@ -83,10 +84,20 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
 
         console.log('demand')
         console.log(demand)
-        const consumModel = await Consum.create({
-            ...consum, 
-                idScenario: scenario.idScenario
+        consum.map(async value => {
+            const consumModel = await Consum.create({
+                ...value, 
+                    idScenario: scenario.idScenario
+            })
         })
+
+        demand.map(async value => {
+            const demandModel = await Demand.create({
+                ...value, 
+                    idScenario: scenario.idScenario
+            })
+        })
+        
         return res.status(200).json(analyzeCreate);
 
     } catch (err) {
