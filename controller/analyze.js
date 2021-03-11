@@ -1,6 +1,7 @@
 const Analyze = require('../model/Analyze');
 const ConsumerUnit = require('../model/ConsumerUnit');
 const Contract = require('../model/Contract');
+const Category = require('../model/Category');
 const Scenario = require('../model/Scenario');
 const Tariff = require('../model/Tariff');
 const Consum = require('../model/Consum');
@@ -231,23 +232,38 @@ module.exports.getAllAnalyzes = async (req, res) => {
 }
 
 module.exports.getIncludeScenarios = async (req, res) => {
-    try {
+       try {
         const {
-            idContract
+            idAnalyze
         } = req.params;
 
-        const contract = await Contract.findByPk(idContract);
+        const analyze = await Analyze.findByPk(idAnalyze);
 
         /* Return error if contract doesnt exist */
-        if (!contract) {
+        if (!analyze) {
             return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
         }
-        const analyzes = await Analyze.findOne({
-            where: { idContract: idContract },
-            include: [Scenario]
+        console.log(analyze.idAnalyzes)
+        const analyzeScenarios = await Analyze.findOne(
+            {
+                where: { idAnalyzes: analyze.idAnalyzes },
+                include: [
+                    {
+                        model: Scenario,
+                        as: 'scenarios', 
+                        include: [
+                            { 
+                                model: Tariff, 
+                                include: [{ 
+                                    model: Category }] 
+                                }
+                            ]
+                        }
+                    ]
+            }
+        );
 
-        });
-        return res.status(200).json(analyzes);
+        return res.status(200).json(analyzeScenarios.scenarios);
 
     } catch (err) {
         return res.status(500).json(err);
@@ -279,3 +295,40 @@ module.exports.update = async (req, res) => {
 
 
 }
+
+// module.exports.getIncludeScenarios = async (req, res) => {
+//     try {
+//         const {
+//             idAnalyzes
+//         } = req.params;
+
+//         const analyze = await Analyze.findByPk(idAnalyzes);
+
+//         /* Return error if contract doesnt exist */
+//         if (!analyze) {
+//             return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+//         }
+//         const analyzeScenarios = await Analyze.findOne(
+//             {
+//                 where: { idAnalyzes: idAnalyzes },
+//                 include: [
+//                     {
+//                         model: Scenario, 
+//                         include: [
+//                             { 
+//                                 model: Tariff, 
+//                                 include: [{ 
+//                                     model: Category }] 
+//                                 }
+//                             ]
+//                         }
+//                     ]
+//             }
+//         );
+
+//         return res.status(200).json(analyzeScenarios);
+
+//     } catch (err) {
+//         return res.status(500).json(err);
+//     }
+// }
