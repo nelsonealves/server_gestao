@@ -11,10 +11,7 @@ module.exports.add = async (req, res) => {
 
 
     const { idAnalyzes } = req.params;
-    console.log('req.body')
-    console.log(req.body)
-    console.log('req.params')
-    console.log(req.params)
+    
     try {
         const analyze = await Analyze.findByPk(idAnalyzes);
 
@@ -36,4 +33,27 @@ module.exports.add = async (req, res) => {
     }
 
 
+}
+
+module.exports.getByIdAnalyzes = async (req, res) => {
+    try {
+
+        const { idAnalyzes } = req.params;
+        
+        const substation = await Substation.findOne({
+            where: {
+                idAnalyzes
+            }
+        });
+
+        if (!substation) {
+            return res.status(400).json({ error: 'NOT_FOUND' });
+        }
+        
+        return res.status(200).json(substation);
+
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(err);
+    }
 }

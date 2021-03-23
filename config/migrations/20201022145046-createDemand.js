@@ -41,7 +41,7 @@ module.exports = {
         allowNull: false,
       },
       valueTotal: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.JSON,
         allowNull: false,
       }
     });

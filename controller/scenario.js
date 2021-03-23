@@ -4,6 +4,7 @@ const Category = require('../model/Category');
 const Tariff = require('../model/Tariff');
 const Consum = require('../model/Consum');
 const Demand = require('../model/Demand');
+const Period = require('../model/Period');
 const { Op } = require('sequelize')
 
 module.exports.add = async (req, res) => {
@@ -146,6 +147,54 @@ module.exports.addMany = async (req, res) => {
         return res.status(500).json(err);
     }
 
+}
+
+module.exports.getConsumDemand = async (req, res) => {
+    const {
+        idScenario
+    } = req.params;
+
+    try {
+        const scenario = await Scenario.findByPk(idScenario);
+
+        /* Return error if contract doesnt exist */
+        if (!scenario) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        const scenarios = await Scenario.findOne(
+            {
+                where: { idScenario },
+                include: [
+                    {
+                        model: Tariff,
+                        include: [
+                            {
+                                model: Category
+                            }]
+                    },
+                    { 
+                        model: Consum, 
+                        include: [
+                            { 
+                                model: Period 
+                            }
+                        ] 
+                    }, { 
+                        model: Demand, 
+                        include: [
+                            { 
+                                model: Period 
+                            }
+                        ] 
+                    }]
+            }
+        );
+
+        return res.status(200).json(scenarios)
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(err);
+    }
 }
 
 module.exports.getByAnalyzes = async (req, res) => {

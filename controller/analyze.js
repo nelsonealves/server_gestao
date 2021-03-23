@@ -49,6 +49,7 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
         idDealership,
         status
     } = req.params;
+    
     try {
         const contract = await Contract.findOne({
             where: {idContract},
@@ -67,8 +68,7 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
             date: new Date(),
             idContract
         })
-        console.log('VALUE TOTAL')
-        console.log(valueTotal)
+   
         const scenario = await Scenario.create({
             idAnalyzes: parseInt(analyzeCreate.idAnalyzes),
             idTariff: tariff[0].idTariff,
@@ -80,24 +80,22 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
 
         analyzeCreate.idScenario = scenario.idScenario;
         await analyzeCreate.save();
-        console.log('consum')
-        console.log(consum)
-
-        console.log('demand')
-        console.log(demand)
+      
         consum.map(async value => {
             const consumModel = await Consum.create({
                 ...value, 
                     idScenario: scenario.idScenario
             })
         })
-
-        demand.map(async value => {
-            const demandModel = await Demand.create({
-                ...value, 
-                    idScenario: scenario.idScenario
+        if(demand){
+            demand.map(async value => {
+                const demandModel = await Demand.create({
+                    ...value, 
+                        idScenario: scenario.idScenario
+                })
             })
-        })
+        }
+        
         
         return res.status(200).json(analyzeCreate);
 

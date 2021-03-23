@@ -10,7 +10,7 @@ class Demand extends Model {
       },
       measured: DataTypes.JSON,
       contracted: DataTypes.JSON,
-      valueTotal: DataTypes.FLOAT,
+      valueTotal: DataTypes.JSON,
       //datasets: DataTypes.JSON,
       status: DataTypes.INTEGER
     }, {

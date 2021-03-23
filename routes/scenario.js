@@ -16,6 +16,10 @@ module.exports = (express) => {
         express.controller.scenario.getByAnalyzes(req, res);
     });
 
+    express.get('/scenario/:idScenario/consum/demand', (req, res) => {
+        express.controller.scenario.getConsumDemand(req, res);
+    });
+
     express.put('/scenario/:idScenario/analyze/:idAnalyze', (req, res) => {
         express.controller.scenario.update(req, res);
     });

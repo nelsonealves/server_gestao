@@ -8,6 +8,10 @@ module.exports = () => {
         express.controller.diesel.get_by_id(req, res);
     });
 
+    express.get('/diesel/:idAnalyzes/analyzes', (req, res) => {
+        express.controller.diesel.getByIdAnalyzes(req, res);
+    });
+
     express.get('/diesels', (req, res) => {
         express.controller.diesel.getAll(req, res);
     });

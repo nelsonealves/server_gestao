@@ -5,7 +5,11 @@ module.exports = () => {
     });
 
     express.get('/substation/:idSubstation', (req, res) => {
-        express.controller.substation.get_by_id(req, res);
+        express.controller.substation.getById(req, res);
+    });
+
+    express.get('/substation/:idAnalyzes/analyzes', (req, res) => {
+        express.controller.substation.getByIdAnalyzes(req, res);
     });
 
     express.get('/substations', (req, res) => {

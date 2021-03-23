@@ -34,8 +34,32 @@ module.exports.add = async (req, res) => {
         return res.status(200).json(diesel);
 
     } catch (err) {
+        
         return res.status(500).json(err);
     }
 
 
+}
+
+module.exports.getByIdAnalyzes = async (req, res) => {
+    try {
+
+        const { idAnalyzes } = req.params;
+        
+        const diesel = await Diesel.findOne({
+            where: {
+                idAnalyzes
+            }
+        });
+
+        if (!diesel) {
+            return res.status(400).json({ error: 'NOT_FOUND' });
+        }
+        
+        return res.status(200).json(diesel);
+
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(err);
+    }
 }
