@@ -81,6 +81,7 @@ module.exports.addConsumDemand = async (req, res) => {
             substation,
             diesel,
         })
+        
         if (consum) {
             for (let x of consum) {
                 await Consum.create({

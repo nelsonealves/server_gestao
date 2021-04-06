@@ -11,7 +11,7 @@ module.exports = (express) => {
     express.get('/conventional/dealership/:idDealership/category/:idCategory', (req, res) => {
         express.controller.conventional.getDealershipCategory(req, res);
     });
-    
+
     express.get('/conventional/:idTariff', (req, res) => {
         express.controller.conventional.getByIdTariff(req, res);
     });

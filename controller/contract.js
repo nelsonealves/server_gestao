@@ -205,6 +205,8 @@ module.exports.getAll = async (req, res) => {
     }
 }
 
+
+
 module.exports.getByConsumerUnit = async (req, res) => {
     try {
         const {
