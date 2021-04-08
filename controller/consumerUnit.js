@@ -59,10 +59,10 @@ module.exports.getById = async (req, res) => {
         const {
             idConsumerUnit,
         } = req.params;
-    
+
         const consumer = await ConsumerUnit.findOne({
             where: { idConsumerUnit: idConsumerUnit },
-            include: [Infrastructure, {model: Contract, include: [{model: Tariff, include: [Category]}]}]
+            include: [Infrastructure, { model: Contract, include: [{ model: Tariff, include: [Category] }] }]
         });
         return res.status(200).json(consumer);
 
@@ -151,18 +151,15 @@ module.exports.getByStatus = async (req, res) => {
                             Substation,
                             {
                                 model: Scenario, as: 'scenarios',
-                                include: [{
-                                    model: Tariff,
-                                    include: [{
-                                        model: Category,
+                                include: [
+                                    {
+                                        model: Tariff,
+                                        include: [{
+                                            model: Category,
+                                        }
+                                        ]
                                     }
-                                    ]
-                                }, {
-                                    model: Consum, as: 'Consums',
-                                    include: [{
-                                        model: Period,
-                                    }]
-                                }, { model: Demand, as: 'Demands' }]
+                                ]
                             }]
                     }, {
                         model: Bill

@@ -224,3 +224,28 @@ module.exports.getByAnalyzes = async (req, res) => {
     }
 }
 
+module.exports.delete = async (req, res) => {
+    try {
+        const {
+            idScenario
+        } = req.params;
+
+        const scenario = await Scenario.findByPk(idScenario);
+
+        /* Return error if contract doesnt exist */
+        if (!scenario) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        const scenarios = await Scenario.destroy(
+            {
+                where: { idScenario },
+            }
+        );
+
+        return res.status(200).json(scenarios);
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+

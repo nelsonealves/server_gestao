@@ -24,7 +24,7 @@ module.exports = (express) => {
         express.controller.scenario.update(req, res);
     });
 
-    express.delete('/scenario/:scenario_id', (req, res) => {
+    express.delete('/scenario/:idScenario', (req, res) => {
         express.controller.scenario.delete(req, res);
     });
 }
