@@ -31,8 +31,12 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
-      payback: {
-        type: Sequelize.FLOAT,
+      optimization: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
+      reactive: {
+        type: Sequelize.BOOLEAN,
         allowNull: true,
       }
 
