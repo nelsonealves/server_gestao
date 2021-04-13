@@ -11,6 +11,8 @@ class Scenario extends Model {
               valueTotal: DataTypes.FLOAT,
               diesel: DataTypes.BOOLEAN,
               substation: DataTypes.BOOLEAN,
+              optimization: DataTypes.BOOLEAN,
+              reactive: DataTypes.BOOLEAN
         }, {
             sequelize,
             tableName: 'Scenario',
@@ -22,6 +24,7 @@ class Scenario extends Model {
         this.belongsTo(models.Tariff, { foreignKey: 'idTariff' });
         this.hasMany(models.Consum, { foreignKey: 'idScenario' });
         this.hasMany(models.Demand, { foreignKey: 'idScenario' });
+        this.hasMany(models.Reactive, { foreignKey: 'idScenario' });
     }
 }
 

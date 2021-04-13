@@ -23,7 +23,8 @@ const State = require('./model/State.js'),
     Demand = require('./model/Demand'),
     Diesel = require('./model/Diesel'),
     Substation = require('./model/Substation'),
-    Auth = require('./model/Auth');
+    Auth = require('./model/Auth'),
+    Reactive = require('./model/Reactive');
 
 const connection = new Sequelize(dbConfig);
 
@@ -47,6 +48,7 @@ Blue.init(connection);
 Period.init(connection);
 Consum.init(connection);
 Demand.init(connection);
+Reactive.init(connection);
 Diesel.init(connection);
 Substation.init(connection);
 
@@ -81,6 +83,7 @@ Blue.associate(connection.models);
 Period.associate(connection.models);
 Consum.associate(connection.models);
 Demand.associate(connection.models);
+Reactive.associate(connection.models);
 Substation.associate(connection.models);
 Diesel.associate(connection.models);
 
