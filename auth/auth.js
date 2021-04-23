@@ -3,6 +3,7 @@ const Auth = require('../model/Auth');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const enviroments = require('../config/environments');
+const bodyParser = require('body-parser');
 
 express.post('/register', async (req, res) => {
     const {
@@ -20,7 +21,9 @@ express.post('/register', async (req, res) => {
         });
 
         if (auth) {
-            return res.status(401).json({ error: 'EMAIL_ALREADY_EXISTS' });
+            return res.status(401).json({ 
+                error: 'EMAIL_ALREADY_EXISTS', 
+                auth});
         }
 
         const newAuth = await Auth.create({

@@ -53,6 +53,7 @@ module.exports.addConsumDemand = async (req, res) => {
         valueTotal,
         payback,
         substation,
+        optimization,
         diesel,
         consum,
         demand
@@ -78,6 +79,7 @@ module.exports.addConsumDemand = async (req, res) => {
             idTariff: tariff[0].idTariff,
             valueTotal,
             payback,
+            optimization,
             substation,
             diesel,
         })

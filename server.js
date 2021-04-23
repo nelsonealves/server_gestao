@@ -8,10 +8,19 @@ expressValidator = require('express-validator'),
 express_session = require('express-session'),
 require('./database.js'),
 authMiddleware = require('./middlewares/auth');
+require('./multer')
 
+
+
+express.use(cors());
+express.use(bodyParser.urlencoded({ extended: true }));
+
+consign().include('faturas')
+// //.include('routes') descomentar para usar medidor
+.into(express);
 
 express.use(bodyParser.json());
-express.use(bodyParser.urlencoded());
+
 express.use(express_session({
 	secret: 'sasdasddffds',
 	resave: false,
@@ -19,7 +28,7 @@ express.use(express_session({
 }));
 //express.use(expressValidator())
 
-express.use(cors());
+
 
 consign().include('auth')
 //.include('routes') descomentar para usar medidor

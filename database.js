@@ -24,7 +24,8 @@ const State = require('./model/State.js'),
     Diesel = require('./model/Diesel'),
     Substation = require('./model/Substation'),
     Auth = require('./model/Auth'),
-    Reactive = require('./model/Reactive');
+    Reactive = require('./model/Reactive'),
+    Fatura = require('./model/Fatura');
 
 const connection = new Sequelize(dbConfig);
 
@@ -51,6 +52,7 @@ Demand.init(connection);
 Reactive.init(connection);
 Diesel.init(connection);
 Substation.init(connection);
+Fatura.init(connection);
 
 Consum.removeAttribute('id')
 Demand.removeAttribute('id')
@@ -58,9 +60,6 @@ Conventional.removeAttribute('id')
 White.removeAttribute('id')
 Green.removeAttribute('id')
 Blue.removeAttribute('id')
-
-
-
 
 Auth.associate(connection.models);
 State.associate(connection.models);
@@ -86,6 +85,6 @@ Demand.associate(connection.models);
 Reactive.associate(connection.models);
 Substation.associate(connection.models);
 Diesel.associate(connection.models);
-
+Fatura.associate(connection.models);
 
 module.exports = connection;
