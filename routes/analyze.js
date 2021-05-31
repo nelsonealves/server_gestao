@@ -36,7 +36,7 @@ module.exports = (express) => {
         express.controller.analyze.update(req, res);
     });
 
-    express.delete('/analyze/:analyze_id', (req, res) => {
+    express.delete('/analyze/:idAnalyzes', (req, res) => {
         express.controller.analyze.delete(req, res);
     });
 }

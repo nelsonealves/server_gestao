@@ -4,8 +4,12 @@ module.exports = (express) => {
         express.controller.consumerUnit.add(req, res);
     });
 
-    express.get('/consumerUnit/:idConsumerUnit/infrastructure/contract', (req, res) => {
+    express.get('/consumerUnit/:idConsumerUnit', (req, res) => {
         express.controller.consumerUnit.getById(req, res);
+    });
+
+    express.get('/consumerUnit/:idConsumerUnit/infrastructure/contract', (req, res) => {
+        express.controller.consumerUnit.getByIdWithInfraContract(req, res);
     });
 
     express.get('/consumerUnits', (req, res) => {

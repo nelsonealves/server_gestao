@@ -3,13 +3,13 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
     try {
       const tariff1 = await queryInterface.bulkInsert('Tariff',[{
-        idCategory: 1,
+        idCategory: 5,
         idDealership: 1,
         date: new Date()
       }]);
 
       const tariff2 = await queryInterface.bulkInsert('Tariff',[{
-        idCategory: 1,
+        idCategory: 5,
         idDealership: 2,
         date: new Date()
       }]);

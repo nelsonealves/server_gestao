@@ -6,28 +6,33 @@ module.exports = {
 
     return queryInterface.createTable('Auth', {
       idAuth: {
-         type: Sequelize.INTEGER,
-         primaryKey: true,
-         autoIncrement: true
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
       },
-      firstName: { 
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      lastName: { 
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       email: {
-         type: Sequelize.STRING,
-         allowNull: false,
-         unique: true
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      tel: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       password: {
-         type: Sequelize.STRING,
-         allowNull: false
+        type: Sequelize.STRING,
+        allowNull: false
       },
-     });
+      confirmEmail: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+   
+    });
 
   },
 

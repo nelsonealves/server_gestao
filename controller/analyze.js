@@ -330,3 +330,30 @@ module.exports.update = async (req, res) => {
 //         return res.status(500).json(err);
 //     }
 // }
+
+module.exports.delete = async (req, res) => {
+    const {
+        idAnalyzes
+    } = req.params;
+
+    try {
+
+        const analyze = Analyze.findByPk(idAnalyzes);
+
+        if (!analyze) {
+            return res.status(404).json({ error: "OBJ_NOT_FOUND" });
+        }
+        
+        const analyzes = await Analyze.destroy({
+            where: {idAnalyzes},
+        })
+        
+        return res.status(200).json(analyzes);
+        
+
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+
+
+}

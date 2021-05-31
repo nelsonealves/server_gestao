@@ -11,8 +11,9 @@ class User extends Model {
         name: DataTypes.STRING,
         identification: DataTypes.STRING,
         email: DataTypes.STRING,
-        tel1: DataTypes.STRING,
-        tel2: DataTypes.STRING,
+        tel: DataTypes.STRING,
+        password: DataTypes.STRING,
+        confirmEmail: DataTypes.BOOLEAN,
     }, {
       sequelize,
       tableName: 'User',

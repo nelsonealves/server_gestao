@@ -4,7 +4,7 @@ module.exports = {
     try {
    
     const tariff = await queryInterface.bulkInsert('Tariff',[{
-      idCategory: 3,
+      idCategory: 13,
       idDealership: 1,
       date: new Date()
     }])

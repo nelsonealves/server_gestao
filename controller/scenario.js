@@ -74,6 +74,8 @@ module.exports.addConsumDemand = async (req, res) => {
             return res.status(400).json({ error: 'NOT_FOUND' });
         }
 
+        console.log(tariff)
+        
         const scenario = await Scenario.create({
             idAnalyzes: parseInt(idAnalyzes),
             idTariff: tariff[0].idTariff,

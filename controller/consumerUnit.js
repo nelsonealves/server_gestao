@@ -20,7 +20,6 @@ const Diesel = require('../model/Diesel');
 const Substation = require('../model/Substation');
 const Tribute = require('../model/Tribute');
 
-
 module.exports.add = async (req, res) => {
     const {
         name,
@@ -55,6 +54,25 @@ module.exports.add = async (req, res) => {
 }
 
 module.exports.getById = async (req, res) => {
+    try {
+        const {
+            idConsumerUnit,
+        } = req.params;
+
+        const consumer = await ConsumerUnit.findOne({
+            where: { idConsumerUnit: idConsumerUnit },
+        });
+        return res.status(200).json(consumer);
+
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}
+
+
+module.exports.getByIdWithInfraContract = async (req, res) => {
     try {
         const {
             idConsumerUnit,
