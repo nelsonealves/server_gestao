@@ -22,9 +22,10 @@ class Scenario extends Model {
     static associate(models) {
         this.belongsTo(models.Analyze, { foreignKey: 'idAnalyzes' });
         this.belongsTo(models.Tariff, { foreignKey: 'idTariff' });
-        this.hasMany(models.Consum, { foreignKey: 'idScenario' });
-        this.hasMany(models.Demand, { foreignKey: 'idScenario' });
-        this.hasMany(models.Reactive, { foreignKey: 'idScenario' });
+        this.hasOne(models.Simulation, { foreignKey: 'idScenario' });
+        // this.hasMany(models.Consum, { foreignKey: 'idScenario' });
+        // this.hasMany(models.Demand, { foreignKey: 'idScenario' });
+        // this.hasMany(models.Reactive, { foreignKey: 'idScenario' });
     }
 }
 

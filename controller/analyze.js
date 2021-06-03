@@ -6,6 +6,8 @@ const Scenario = require('../model/Scenario');
 const Tariff = require('../model/Tariff');
 const Consum = require('../model/Consum');
 const Demand = require('../model/Demand');
+const Reactive = require('../model/Reactive');
+const Simulation = require('../model/Simulation');
 
 module.exports.add = async (req, res) => {
     const {
@@ -36,11 +38,13 @@ module.exports.add = async (req, res) => {
 module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
     const {
         date,
-        consum,
-        demand,
+        bills,
         valueTotal,
         substation,
-        diesel
+        diesel,
+        reactive,
+        optimization,
+        
     } = req.body;
 
     const {
@@ -75,26 +79,18 @@ module.exports.addAnalyzesAndScenarioRef = async (req, res) => {
             substation,
             diesel,
             valueTotal: valueTotal,
+            optimization,
+            reactive
            
         })
 
         analyzeCreate.idScenario = scenario.idScenario;
         await analyzeCreate.save();
       
-        consum.map(async value => {
-            const consumModel = await Consum.create({
-                ...value, 
-                    idScenario: scenario.idScenario
-            })
+        const simulation = await Simulation.create({
+            idScenario: scenario.idScenario,
+            bills
         })
-        if(demand){
-            demand.map(async value => {
-                const demandModel = await Demand.create({
-                    ...value, 
-                        idScenario: scenario.idScenario
-                })
-            })
-        }
         
         
         return res.status(200).json(analyzeCreate);

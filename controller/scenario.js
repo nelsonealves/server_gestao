@@ -5,6 +5,8 @@ const Tariff = require('../model/Tariff');
 const Consum = require('../model/Consum');
 const Demand = require('../model/Demand');
 const Period = require('../model/Period');
+const Reactive = require('../model/Reactive');
+const Simulation = require('../model/Simulation');
 const { Op } = require('sequelize')
 
 module.exports.add = async (req, res) => {
@@ -52,11 +54,11 @@ module.exports.addConsumDemand = async (req, res) => {
     const {
         valueTotal,
         payback,
+        bills,
         substation,
         optimization,
         diesel,
-        consum,
-        demand
+        reactive
     } = req.body;
 
     const {
@@ -80,30 +82,17 @@ module.exports.addConsumDemand = async (req, res) => {
             idAnalyzes: parseInt(idAnalyzes),
             idTariff: tariff[0].idTariff,
             valueTotal,
-            payback,
             optimization,
             substation,
+            reactive,
             diesel,
+        
         })
         
-        if (consum) {
-            for (let x of consum) {
-                await Consum.create({
-                    ...x,
-                    idScenario: scenario.idScenario
-                })
-            }
-        }
-
-        if (demand) {
-            for (let x of demand) {
-                await Demand.create({
-                    ...x,
-                    idScenario: scenario.idScenario,
-                    status: 0
-                })
-            }
-        }
+        const simulation = await Simulation.create({
+            idScenario: scenario.idScenario,
+            bills
+        })
 
         return res.status(200).json(scenario);
 
@@ -171,27 +160,9 @@ module.exports.getConsumDemand = async (req, res) => {
                 where: { idScenario },
                 include: [
                     {
-                        model: Tariff,
-                        include: [
-                            {
-                                model: Category
-                            }]
-                    },
-                    { 
-                        model: Consum, 
-                        include: [
-                            { 
-                                model: Period 
-                            }
-                        ] 
-                    }, { 
-                        model: Demand, 
-                        include: [
-                            { 
-                                model: Period 
-                            }
-                        ] 
-                    }]
+                        model: Simulation,
+                    }
+                    ]
             }
         );
 

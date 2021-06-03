@@ -29,11 +29,11 @@ module.exports = {
          },
          password: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
          },
          confirmEmail: {
             type: Sequelize.BOOLEAN,
-            allowNull: false,
+            allowNull: true,
          },
          idAuth: {
             type: Sequelize.INTEGER,

@@ -29,15 +29,15 @@ module.exports = {
       },
       valueTotal: {
         type: Sequelize.FLOAT,
-        allowNull: true,
+        allowNull: false,
       },
       optimization: {
         type: Sequelize.BOOLEAN,
-        allowNull: true,
+        allowNull: false,
       },
       reactive: {
         type: Sequelize.BOOLEAN,
-        allowNull: true,
+        allowNull: false,
       }
 
     });

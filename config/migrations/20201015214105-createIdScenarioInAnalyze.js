@@ -10,16 +10,12 @@ module.exports = {
       model: 'Scenario',
       key: 'idScenario'
     },
+    allowNull: true,
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE'
   }
     )
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  
   },
 
   down: async (queryInterface, Sequelize) => {

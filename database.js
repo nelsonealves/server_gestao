@@ -18,16 +18,17 @@ const State = require('./model/State.js'),
     Green = require('./model/Green'),
     Blue = require('./model/Blue'),
     Tariff = require('./model/Tariff'),
-    Period = require('./model/Period'),
-    Consum = require('./model/Consum'),
-    Demand = require('./model/Demand'),
+    // Period = require('./model/Period'),
+    // Consum = require('./model/Consum'),
+    // Demand = require('./model/Demand'),
     Diesel = require('./model/Diesel'),
     Substation = require('./model/Substation'),
     Auth = require('./model/Auth'),
-    Reactive = require('./model/Reactive'),
+    // Reactive = require('./model/Reactive'),
     StatusAuth = require('./model/StatusAuth'),
     Fatura = require('./model/Fatura'),
-    SimpleReport = require('./model/SimpleReport');
+    SimpleReport = require('./model/SimpleReport'),
+    Simulation = require('./model/Simulation');
 
 const connection = new Sequelize(dbConfig);
 
@@ -49,18 +50,19 @@ Conventional.init(connection);
 White.init(connection);
 Green.init(connection);
 Blue.init(connection);
-Period.init(connection);
-Consum.init(connection);
-Demand.init(connection);
-Reactive.init(connection);
+// Period.init(connection);
+// Consum.init(connection);
+// Demand.init(connection);
+// Reactive.init(connection);
 Diesel.init(connection);
 Substation.init(connection);
 Fatura.init(connection);
 SimpleReport.init(connection);
+Simulation.init(connection)
 
-
-Consum.removeAttribute('id')
-Demand.removeAttribute('id')
+// Consum.removeAttribute('id')
+// Demand.removeAttribute('id')
+Simulation.removeAttribute('id')
 Conventional.removeAttribute('id')
 White.removeAttribute('id')
 Green.removeAttribute('id')
@@ -85,13 +87,14 @@ Conventional.associate(connection.models);
 White.associate(connection.models);
 Green.associate(connection.models);
 Blue.associate(connection.models);
-Period.associate(connection.models);
-Consum.associate(connection.models);
-Demand.associate(connection.models);
-Reactive.associate(connection.models);
+// Period.associate(connection.models);
+// Consum.associate(connection.models);
+// Demand.associate(connection.models);
+// Reactive.associate(connection.models);
 Substation.associate(connection.models);
 Diesel.associate(connection.models);
 Fatura.associate(connection.models);
 SimpleReport.associate(connection.models);
+Simulation.associate(connection.models);
 
 module.exports = connection;

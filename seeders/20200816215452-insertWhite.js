@@ -12,12 +12,12 @@ module.exports = {
     console.log(tariff);
 
     await queryInterface.bulkInsert('White', [{
-      tePonta: 1,
-      tusdPonta: 0.8,
-      teIntermed: 0.6,
-      tusdIntermed: 0.1,
-      teForaPonta: 0.4,
-      tusdForaPonta: 0.07,
+      tePonta: 0.423,
+      tusdPonta: 0.562,
+      teIntermed: 0.261,
+      tusdIntermed: 0.376,
+      teForaPonta: 0.261,
+      tusdForaPonta: 0.19,
       idTariff: tariff
     }]);
     await transaction.commit();
