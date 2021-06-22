@@ -1,10 +1,10 @@
 {
     "db": {
-        "host": "mysql.bluebill.com.br", 
+        "host": "localhost", 
         "port": 3306,		
-        "username": "bluebill_add1",	
-        "password": "bluebill*9905",	
-        "database": "bluebill" 
+        "username": "nelson",	
+        "password": "nelson",	
+        "database": "gestaoTeste" 
     },
     "express": {
         "port": 8081	
