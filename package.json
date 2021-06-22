@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "react-scripts build",
     "play": "nodemon server.js",
     "start": "node server.js"
   },

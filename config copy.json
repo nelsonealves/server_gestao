@@ -1,0 +1,16 @@
+{
+    "db": {
+        "host": "mysql.bluebill.com.br", 
+        "port": 3306,		
+        "username": "bluebill_add1",	
+        "password": "bluebill*9905",	
+        "database": "bluebill" 
+    },
+    "express": {
+        "port": 8081	
+    },
+    "src": {
+        "pwd": "/home/nelson/Documentos"  
+    }
+}
+
