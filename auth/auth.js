@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const enviroments = require('../config/environments');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer')
+const axios = require('axios')
 
 var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -70,6 +71,20 @@ express.post('/register/user', async (req, res) => {
         return res.status(500).json(err);
     }
 });
+
+express.get('/teste-celesc', async (req, res) => {
+    const response = await axios.get('https://agenciaweb.celesc.com.br/AgenciaWeb/autenticar/loginCliente.do')
+    
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+        https://agenciaweb.celesc.com.br/AgenciaWeb/imprimirSegundaVia/imprimirSegundaVia.do?COD_UN_CONS=40099603&COD_CPU=01&NUM_SEQ_OPER=20217296921680&COD_SITU_FAT=N&HISTPAG=1&MES_REF=06/2021
+
+      res.json({cookies: response.headers})
+})
+
 
 express.post('/register/integrator', async (req, res) => {
     const {
