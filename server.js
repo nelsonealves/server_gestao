@@ -45,17 +45,17 @@ consign().include('routes')
 
 const port = 8081
 
-const options = {
-	cert: fs.readFileSync(path.join(__dirname, 'certs', 'ca.crt')),
-	key: fs.readFileSync(path.join(__dirname, 'certs', 'ca.key'))
-  };
+// const options = {
+// 	cert: fs.readFileSync(path.join(__dirname, 'certs', 'ca.crt')),
+// 	key: fs.readFileSync(path.join(__dirname, 'certs', 'ca.key'))
+//   };
   
-  https.createServer(options, function (req, res) {
-	console.log('Servidor operando na porta 8080')
-  }).listen(8000);
-// express.listen(port, function (teste) {
-// 	console.log(`Express funcionando na porta ${port}!\n`);
+//   https.createServer(options, function (req, res) {
+// 	console.log('Servidor operando na porta 8080')
+//   }).listen(8000);
+express.listen(port, function (teste) {
+	console.log(`Express funcionando na porta ${port}!\n`);
 
-// })
+})
 
 module.exports = express
