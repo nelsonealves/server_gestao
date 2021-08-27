@@ -62,3 +62,7 @@ module.exports.getReactiveConsum = async (req, res) => {
         return res.status(500).json(err);
     }
 }
+
+module.exports.getTariffByConsumerUnit = async (req, res) => {
+    
+}
