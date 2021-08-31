@@ -208,6 +208,7 @@ module.exports.getAll = async (req, res) => {
 
 
 module.exports.getByConsumerUnit = async (req, res) => {
+    
     try {
         const {
             idConsumerUnit
@@ -225,6 +226,8 @@ module.exports.getByConsumerUnit = async (req, res) => {
 
 
         });
+
+
         return res.status(200).json(contracts);
 
     } catch (err) {

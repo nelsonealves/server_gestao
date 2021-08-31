@@ -8,6 +8,11 @@ module.exports = (express) => {
         express.controller.category.getByNames(req, res);
     });
 
+    express.get('/category/:idConsumerUnit/consumerUnit', (req, res) => {
+        console.log('entrou')
+        express.controller.category.getByConsumerUnit(req, res);
+    });
+
     express.get('/category/', (req, res) => {
         express.controller.category.getAll(req, res);
     });

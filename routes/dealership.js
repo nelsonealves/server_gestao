@@ -12,6 +12,10 @@ module.exports = (express) => {
         express.controller.dealership.getCategories(req, res);
     });
 
+    express.get('/dealership/:idConsumerUnit/consumerUnit', (req, res) => {
+        express.controller.dealership.getByConsumerUnit(req, res);
+    });
+
     express.get('/dealership/:idDealership/tributes', (req, res) => {
         express.controller.dealership.getTributes(req, res);
     });

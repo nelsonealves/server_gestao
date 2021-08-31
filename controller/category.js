@@ -1,4 +1,7 @@
 const Category = require('../model/Category');
+const ConsumerUnit = require('../model/ConsumerUnit');
+const Contract = require('../model/Contract');
+const Tariff = require('../model/Tariff');
 
 module.exports.get = async (req, res) => {
     const {
@@ -31,7 +34,7 @@ module.exports.getByNames = async (req, res) => {
 
     try {
         const category = await Category.findAll({
-            where: { 
+            where: {
                 group: nameGroup,
                 modality: nameModality,
                 subgroup: nameSubgroup
@@ -47,6 +50,38 @@ module.exports.getByNames = async (req, res) => {
     }
 
 
+}
+module.exports.getByConsumerUnit = async (req, res) => {
+    try {
+        const {
+            idConsumerUnit
+        } = req.params;
+
+        const consumerUnit = await ConsumerUnit.findByPk(idConsumerUnit);
+
+        /* Returns error if dealership doesnt exist */
+        if (!consumerUnit) {
+            return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
+        }
+        const contract = await Contract.findAll({
+            where: { idConsumerUnit: idConsumerUnit },
+            include: [
+                { model: Tariff, 
+                    include:[
+                        Category
+                    ]} 
+                ]
+
+
+        });
+
+
+        return res.status(200).json(contract[0].Tariff.Category);
+
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(err);
+    }
 }
 
 module.exports.getAll = async (req, res) => {

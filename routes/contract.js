@@ -5,6 +5,7 @@ module.exports = (express) => {
     });
 
     express.post('/contract/consumerUnit/:idConsumerUnit/dealership/:idDealership/category/:idCategory/status/:status', (req, res) => {
+        
         express.controller.contract.addAndChangeStatus(req, res);
     });
 
@@ -16,7 +17,8 @@ module.exports = (express) => {
         express.controller.contract.getAll(req, res);
     });
 
-    express.get('/contract/consumerUnit/:idConsumerUnit', (req, res) => {
+    express.get('/contract/:idConsumerUnit/consumerUnit', (req, res) => {
+        console.log('entrou')
         express.controller.contract.getByConsumerUnit(req, res);
     });
 

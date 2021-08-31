@@ -40,7 +40,7 @@ consign().include('routes')
 .then('controller')
 .into(express);
 
-const port = process.env.PORT_SERVER || 8081
+const port = 8081
 
 express.listen(port , function(teste){
   console.log(`Express funcionando na porta ${port}!\n`);
