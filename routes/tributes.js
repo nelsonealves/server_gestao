@@ -11,6 +11,10 @@ module.exports = (express) => {
     express.get('/tribute/dealership/:idDealership', (req, res) => {
         express.controller.tributes.getByIdDealership(req, res);
     });
+    
+    express.get('/tribute/:idConsumerUnit/consumerUnit', (req, res) => {
+        express.controller.tributes.getByIdConsumerUnit(req, res);
+    });
 
     express.get('/tributes', (req, res) => {
         express.controller.tributes.get_all(req, res);

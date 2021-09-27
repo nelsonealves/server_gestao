@@ -96,7 +96,7 @@ module.exports.getByConsumerUnit = async (req, res) => {
             return res.status(400).json({ error: 'OBJ_NOT_FOUND' });
         }
 
-
+        console.log(consumer)
         return res.status(200).json(consumer.Contracts[0].Tariff.Dealership);
 
     } catch (err) {

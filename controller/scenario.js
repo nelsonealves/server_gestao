@@ -77,7 +77,7 @@ module.exports.addConsumDemand = async (req, res) => {
         }
 
         console.log(tariff)
-        
+
         const scenario = await Scenario.create({
             idAnalyzes: parseInt(idAnalyzes),
             idTariff: tariff[0].idTariff,
@@ -86,9 +86,8 @@ module.exports.addConsumDemand = async (req, res) => {
             substation,
             reactive,
             diesel,
-        
         })
-        
+
         const simulation = await Simulation.create({
             idScenario: scenario.idScenario,
             bills
@@ -143,6 +142,76 @@ module.exports.addMany = async (req, res) => {
 
 }
 
+module.exports.createScenarioRef = async (req, res) => {
+    const {
+        valueTotal,
+        payback,
+        bills,
+        substation,
+        optimization,
+        diesel,
+        reactive
+    } = req.body;
+
+
+
+    const {
+        idAnalyzes,
+        idCategory,
+        idDealership } = req.params;
+    try {
+        const analyze = await Analyze.findByPk(idAnalyzes);
+        const tariffReq = await Tariff.findOne({
+            where: {
+                [Op.and]: [
+                    {
+                        idDealership: idDealership
+                    },
+                    {
+                        idCategory: idCategory
+                    }
+                ]
+            }
+        });
+
+        if (!analyze || !tariffReq) {
+            return res.status(400).json({ error: 'NOT_FOUND' });
+        }
+
+        const scenario = await Scenario.create({
+            idAnalyzes: parseInt(analyze.idAnalyzes),
+            idTariff: tariffReq.idTariff,
+            valueTotal,
+            optimization,
+            substation,
+            reactive,
+            diesel,
+
+        })
+        
+        await Analyze.update({idScenario: scenario.idScenario}, {
+            returning: true,
+            where: {
+                idAnalyzes
+            }
+          });
+
+        const simulation = await Simulation.create({
+            idScenario: scenario.idScenario,
+            bills
+        });
+
+
+        // const scenarios = await Scenario.bulkCreate(values);
+
+        return res.status(200).json({scenario, simulation});
+
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json(err);
+    }
+}
+
 module.exports.getConsumDemand = async (req, res) => {
     const {
         idScenario
@@ -162,7 +231,7 @@ module.exports.getConsumDemand = async (req, res) => {
                     {
                         model: Simulation,
                     }
-                    ]
+                ]
             }
         );
 
